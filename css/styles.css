@@ -225,3 +225,41 @@ a.custom-card:hover {
   opacity: 0;
   overflow: hidden;
 }
+.product{
+  padding: auto;
+  margin-top: 5%;
+  margin: auto;
+  width: 70%;
+  height: 50%;
+  border: 5px solid black;
+  background-color: rgba(219, 215, 215, 0.5);
+  float: inherit;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.product .img {
+  flex: 1;
+}
+
+.product .img img {
+  max-width: 100%;
+  height: auto;
+}
+
+.product .col {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product .caract h2 {
+  margin: 0;
+}
+
+.product .ventas p {
+  margin: 0;
+}
