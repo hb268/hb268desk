@@ -188,3 +188,40 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+#loginGeneral {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-image: url(/img/header.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center left;
+}
+
+#loginContainer {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.form {
+  transition: opacity 0.5s, height 0.5s;
+}
+
+.acceso {
+  height: auto;
+}
+
+.registro {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}

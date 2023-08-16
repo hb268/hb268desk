@@ -39,3 +39,30 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const loginLink = document.getElementById("loginLink");
+  const estaLogueado = localStorage.getItem("logueado") === "true";
+  if (estaLogueado) {
+      loginLink.innerHTML = "Logout";
+      loginLink.addEventListener("click", () => {
+          logout();
+      });
+  } else {
+      loginLink.innerHTML = "Login";
+  }
+});
+
+function logout() {
+  localStorage.removeItem("logueado");
+  window.location.href = "login.html";
+}
+
+DirigirALogin()
+function DirigirALogin(){
+  var estaLogueado = localStorage.getItem('logueado');
+  if (estaLogueado != "true") {
+      window.location.href = 'login.html';
+  }
+}
