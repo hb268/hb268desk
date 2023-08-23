@@ -189,16 +189,19 @@ a.custom-card:hover {
   color: orange;
 }
 
+
+
+
 #loginGeneral {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 125vh;
   margin: 0;
-  background-image: url(/img/header.gif);
+  background-image: url(/img/header.png);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center left;
+  background-position: center;
 }
 
 #loginContainer {
@@ -225,6 +228,7 @@ a.custom-card:hover {
   opacity: 0;
   overflow: hidden;
 }
+
 .product{
   padding: auto;
   margin-top: 5%;

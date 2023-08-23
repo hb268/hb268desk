@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function logout() {
   localStorage.removeItem("logueado");
+  localStorage.removeItem("nombreLogueado");
   window.location.href = "login.html";
 }
 
@@ -66,3 +67,8 @@ function DirigirALogin(){
       window.location.href = 'login.html';
   }
 }
+
+document.addEventListener("DOMContentLoaded", function(){
+  var nameLogueado = localStorage.getItem('nombreLogueado');
+  document.getElementById("nombreLogin").innerHTML=nameLogueado
+});

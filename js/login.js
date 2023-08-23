@@ -78,9 +78,10 @@ btnAcceder.addEventListener("click", () => {
     } else {
         alert("Acceso correcto.");
         window.location.href = "index.html";
+        localStorage.setItem("logueado", "true");
+        localStorage.setItem("nombreLogueado", usernameLogin.value);
         document.getElementById("usernameLogin").value = "";
         document.getElementById("contraseñaLogin").value = "";
-        localStorage.setItem("logueado", "true");
     }
 });
 
