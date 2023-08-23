@@ -8,7 +8,10 @@ container.remove();
 
 // Función para cargar y mostrar la lista de productos
 function loadProducts() {
-    const productsUrl = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+
+    const selectedCategoryId = localStorage.getItem("selectedCategoryId");
+    const DivID =  localStorage.getItem("catID");
+    const productsUrl = `https://japceibal.github.io/emercado-api/cats_products/${DivID}.json`;
   
     getJSONData(productsUrl)
       .then(response => {
