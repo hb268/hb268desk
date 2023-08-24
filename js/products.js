@@ -95,3 +95,73 @@ function loadProducts() {
     document.getElementById("rangeFilterCountMax").value = "";
         loadProducts();
   });
+
+
+ function generateProductList() {
+    const productListDiv = document.getElementById("productList");
+    let productListHTML = "";
+  
+    productsData.forEach(product => {
+      productListHTML += `
+      <div class="product list-group-item list-group-item-action cursor-active">
+            <div class="row">
+              <div class="col-3">
+                <img src="${product.image}" alt="${product.name}" class="img-thumbnail">
+              </div>
+              <div class="col">
+                <div class="d-flex w-100 justify-content-between">
+                  <h4 class="mb-1">${product.name}</h4>
+                  <small class="text-muted">Cantidad Vendida: ${product.soldCount}</small>
+                </div>
+                <p class="mb-1">${product.description}</p>
+                <p class="mb-1">Precio: $${product.cost} ${product.currency}</p>
+              </div>
+            </div>
+          </div>
+      `;
+    });
+  
+    productListDiv.innerHTML = productListHTML;
+  }
+  
+
+
+
+  
+// Agrega un evento de clic al botón "Ordenar por Precio Ascendente"
+document.getElementById("sortAsc").addEventListener("click", function () {
+  
+  // Ordena el array productsData por precio de manera ascendente
+  productsData.sort(function(a, b) {
+    return a.cost - b.cost;
+  });
+
+  // Vuelve a generar la lista de productos ordenados por precio
+  generateProductList();
+});
+
+
+// Agrega un evento de clic al botón "Ordenar por Precio Ascendente"
+document.getElementById("sortDesc").addEventListener("click", function () {
+  
+  // Ordena el array productsData por precio de manera ascendente
+  productsData.sort(function(a, b) {
+    return b.cost - a.cost;
+  });
+
+  // Vuelve a generar la lista de productos ordenados por precio
+  generateProductList();
+});
+
+
+// Agrega un evento de clic al botón "Ordenar por Precio Ascendente"
+document.getElementById("sortByCount").addEventListener("click", function () {
+  
+  // Ordena el array productsData por precio de manera ascendente
+  productsData.sort(function(a, b) {
+    return b.soldCount - a.soldCount;
+  });
+
+  // Vuelve a generar la lista de productos ordenados por precio
+  generateProductList();
+});
