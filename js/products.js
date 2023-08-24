@@ -1,10 +1,7 @@
 const productListDiv = document.createElement('div');
 productListDiv.id = "productList";
 
-const container = document.querySelector("main");
-
-container.before(productListDiv);
-container.remove();
+productos.appendChild(productListDiv);
 
 // Función para cargar y mostrar la lista de productos
 function loadProducts() {
@@ -22,21 +19,21 @@ function loadProducts() {
   
           products.forEach(product => {
             productListHTML += `
-               <div class="product">
-                <div class ="img">
-                    <img src="${product.image}" alt="${product.name}">
-                </div>
-                <div class="col">
-                    <div class="caract">
-                        <h2>${product.name}</h2>
-                        <p>${product.description}</p>
-                    </div>
-                    <div class="ventas">
-                        <p>Precio: $${product.cost} ${product.currency}</p>
-                        <p>Cantidad Vendida: ${product.soldCount}</p>
-                    </div>
-                </div>
+            <div class="product list-group-item list-group-item-action cursor-active">
+            <div class="row">
+              <div class="col-3">
+                <img src="${product.image}" alt="${product.name}" class="img-thumbnail">
               </div>
+              <div class="col">
+                <div class="d-flex w-100 justify-content-between">
+                  <h4 class="mb-1">${product.name}</h4>
+                  <small class="text-muted">Cantidad Vendida: ${product.soldCount}</small>
+                </div>
+                <p class="mb-1">${product.description}</p>
+                <p class="mb-1">Precio: $${product.cost} ${product.currency}</p>
+              </div>
+            </div>
+          </div>
             `;
           });
   

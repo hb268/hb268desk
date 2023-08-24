@@ -175,10 +175,6 @@ footer p {
   display: none;
 }
 
-main {
-  min-height: calc(100vh - 210px);
-}
-
 a.custom-card,
 a.custom-card:hover {
   color: inherit;
@@ -188,9 +184,6 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
-
-
-
 
 #loginGeneral {
   display: flex;
@@ -228,7 +221,7 @@ a.custom-card:hover {
   opacity: 0;
   overflow: hidden;
 }
-
+/* 
 .product{
   padding: auto;
   margin-top: 5%;
@@ -266,4 +259,9 @@ a.custom-card:hover {
 
 .product .ventas p {
   margin: 0;
+} */
+
+#productList {
+  width: 75%;
+  margin: 0 auto;
 }
