@@ -4,6 +4,9 @@ productListDiv.id = "productList";
 productos.appendChild(productListDiv);
 let productsData = []; 
 
+const catName = localStorage.getItem('nombreCat');
+document.getElementById("nombreCategoria").innerHTML=catName
+
 function loadProducts() {
     const DivID =  localStorage.getItem("catID");
     const productsUrl = `https://japceibal.github.io/emercado-api/cats_products/${DivID}.json`;
@@ -123,10 +126,6 @@ function loadProducts() {
   
     productListDiv.innerHTML = productListHTML;
   }
-  
-
-
-
   
 // Agrega un evento de clic al botón "Ordenar por Precio Ascendente"
 document.getElementById("sortAsc").addEventListener("click", function () {

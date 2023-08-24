@@ -35,22 +35,23 @@ function sortCategories(criteria, array){
     return result;
 }
 
-function setCatID(id) {
+function setCatID(id, nombre) {
     localStorage.setItem("catID", id);
+    localStorage.setItem("nombreCat", nombre);
     window.location = "products.html"
 }
 
-function showCategoriesList(){
+function showCategoriesList() {
 
     let htmlContentToAppend = "";
-    for(let i = 0; i < currentCategoriesArray.length; i++){
+    for (let i = 0; i < currentCategoriesArray.length; i++) {
         let category = currentCategoriesArray[i];
 
         if (((minCount == undefined) || (minCount != undefined && parseInt(category.productCount) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))){
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))) {
 
             htmlContentToAppend += `
-            <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
+            <div onclick="setCatID(${category.id}, '${category.name}')" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
                         <img src="${category.imgSrc}" alt="${category.description}" class="img-thumbnail">
