@@ -153,15 +153,19 @@ document.getElementById("sortDesc").addEventListener("click", function () {
 });
 
 
-// Agrega un evento de clic al botón "Ordenar por Precio Ascendente"
+let ordenAscendente = false;
+
 document.getElementById("sortByCount").addEventListener("click", function () {
-  
-  // Ordena el array productsData por precio de manera ascendente
+  ordenAscendente = !ordenAscendente;
+
   productsData.sort(function(a, b) {
-    return b.soldCount - a.soldCount;
+    if (ordenAscendente) {
+      return a.soldCount - b.soldCount;
+    } else {
+      return b.soldCount - a.soldCount;
+    }
   });
 
-  // Vuelve a generar la lista de productos ordenados por precio
   generateProductList();
 });
 
