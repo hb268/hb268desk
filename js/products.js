@@ -160,9 +160,9 @@ document.getElementById("sortByCount").addEventListener("click", function () {
 
   productsData.sort(function(a, b) {
     if (ordenAscendente) {
-      return a.soldCount - b.soldCount;
-    } else {
       return b.soldCount - a.soldCount;
+    } else {
+      return a.soldCount - b.soldCount;
     }
   });
 
