@@ -23,7 +23,7 @@ function loadProducts() {
   
           products.forEach(product => {
             productListHTML += `
-            <div class="product list-group-item list-group-item-action cursor-active">
+            <div class="product list-group-item list-group-item-action cursor-active" id=${product.id}>
             <div class="row">
               <div class="col-3">
                 <img src="${product.image}" alt="${product.name}" class="img-thumbnail">
@@ -42,6 +42,15 @@ function loadProducts() {
           });
   
           productListDiv.innerHTML = productListHTML;
+          const idDelDiv = document.querySelectorAll(".product")
+          idDelDiv.forEach(div =>{
+            div.addEventListener("click", function(){
+              const idDelProducto = this.getAttribute("id")
+              localStorage.setItem("productoSeleccionado", idDelProducto)
+              window.location.href = "product-info.html"
+            })
+          })
+
         } else {
           console.error("Error al cargar los productos:", response.data);
         }
