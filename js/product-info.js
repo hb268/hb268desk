@@ -62,7 +62,7 @@ function loadComment(){
 
                 let CommentList =`
                 <br><br><br><br>
-                <div class="container border" >  
+                <div class="container border">  
                 <table id="comentarios" class="table table-hover table-striped">
                 <thead>
                 <tr class="container">
@@ -79,7 +79,7 @@ function loadComment(){
                 <th class="col-3 text-left">Fecha</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="comentarios">
                 `;
 
                 comment.forEach( com => {
@@ -88,7 +88,7 @@ function loadComment(){
                 <td class="col-1"><img src="img/User_icon.webp" class="img-rounded" style="width:15%" ></td>
                 <td class="col-2" >${com.user}</td>
                 <td class="col-3" >${com.description}</td>
-                <td class="col-3 text-center" >
+                <td class="col-3 text-center">
                 `
                     + `<span id="star"class="fa fa-star checked"></span>`.repeat(com.score) +
                     `<span id="star"class="fa fa-star "></span>`.repeat(5-com.score) +
@@ -122,24 +122,73 @@ function loadComment(){
                         <option value="5" selected>5</option>
                     </select>
                     </div><br>
-                    <input type="submit" value="Enviar" class="form-control"><br>
+                    <input type="submit" value="Enviar" id= "btnComment" class="form-control"><br>
                     
                 </form>
                 </div>
                 
-                
-                
-                
                 `;
+                //DESAFIATE
                 
+                function obtenerFechaYHora() {
+                    var fechaHora = new Date();
+                    return fechaHora.toLocaleString(); 
+                  }
+                  let fechaHora= obtenerFechaYHora();
+                
+                function popUp(){
+                    let mensajito = "Nuevo comentario publicado con exito!";
+                    alert(mensajito);
+
+                }
+                
+                function addNewComment() {
+                    let comentario = document.getElementById("opinion").value;
+                    let score = document.getElementById("score").value;
+                    let nombreU = localStorage.getItem("nombreLogueado");
+                    let arrayComentarios = {dato: nombreU, dato2: comentario, dato3: score, dato4: fechaHora};
+                    let datosJSON = JSON.stringify(arrayComentarios);
+
+                    
+                        if (comentario.trim() !== "") {
+                            popUp();
+                           sessionStorage.setItem("opinion", datosJSON);
+                           sessionStorage.getItem("opinion");
+                           
+                        
+                        let nuevoComentario = `
+                        <tr class="container">
+                        <td class="col-1"><img src="img/User_icon.webp" class="img-rounded" style="width:15%" ></td>
+                        <td class="col-2">${nombreU}</td>
+                        <td class="col-3">${comentario}</td>
+                        <td class="col-3 text-center">
+                        `
+                            + `<span id="star"class="fa fa-star checked"></span>`.repeat(score) +
+                            `<span id="star"class="fa fa-star "></span>`.repeat(5-score) +
+                        `
+                        </td>
+                        <td class="col-3 small text-muted">${fechaHora}</td>
+                        </tr>
+                        `;
+                
+                let contenedorDeComentarios = document.getElementById("comentarios"); 
+                contenedorDeComentarios.innerHTML += nuevoComentario;
+
+                
+                document.getElementById("opinion").value = "";
+                    }
+                }
+                
+                    
+                    const botonComentario =  document.getElementById("btnComment");
+                    botonComentario.addEventListener("click", addNewComment);
             } else {
                 console.error("Error", response.data)
             }
-              
-        
-
+          
         })
 }
 
 
 document.addEventListener("DOMContentLoaded", loadComment);
+
