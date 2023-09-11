@@ -136,11 +136,7 @@ function loadComment(){
                   }
                   let fechaHora= obtenerFechaYHora();
                 
-                function popUp(){
-                    let mensajito = "Nuevo comentario publicado con exito!";
-                    alert(mensajito);
-
-                }
+                
                 
                 function addNewComment() {
                     let comentario = document.getElementById("opinion").value;
@@ -151,7 +147,7 @@ function loadComment(){
 
                     
                         if (comentario.trim() !== "") {
-                            popUp();
+                            
                            sessionStorage.setItem("opinion", datosJSON);
                            sessionStorage.getItem("opinion");
                            
