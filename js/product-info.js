@@ -169,7 +169,7 @@ function loadComment(){
                 
                 let contenedorDeComentarios = document.getElementById("comentarios"); 
                 contenedorDeComentarios.innerHTML += nuevoComentario;
-
+                            
                 
                 document.getElementById("opinion").value = "";
                     }
