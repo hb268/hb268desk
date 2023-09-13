@@ -61,53 +61,72 @@ function loadProducts() {
   }
   
   function filtrarPorPrecio() {
-    const precioMinimo = parseFloat(document.getElementById("rangeFilterCountMin").value);
-    const precioMaximo = parseFloat(document.getElementById("rangeFilterCountMax").value);
-
-    const productosFiltrados = productsData.filter(product => {
-      const precioProducto = parseFloat(product.cost);
-      return !isNaN(precioProducto) && precioProducto >= precioMinimo && precioProducto <= precioMaximo;
-    });
-
-    const productListDiv = document.getElementById("productList");
-
-    let productListHTML = "";
-
-    productosFiltrados.forEach(product => {
-      productListHTML += `
-      <div class="product list-group-item list-group-item-action cursor-active">
-            <div class="row">
-              <div class="col-3">
-                <img src="${product.image}" alt="${product.name}" class="img-thumbnail">
-              </div>
-              <div class="col">
-                <div class="d-flex w-100 justify-content-between">
-                  <h4 class="mb-1">${product.name}</h4>
-                  <small class="text-muted">Cantidad Vendida: ${product.soldCount}</small>
+    const precioMinimoInput = document.getElementById("rangeFilterCountMin");
+    const precioMaximoInput = document.getElementById("rangeFilterCountMax");
+    const notificationDiv = document.getElementById("notification");
+    const notificationMessage = document.getElementById("notification-message");
+  
+    const precioMinimo = parseFloat(precioMinimoInput.value);
+    const precioMaximo = parseFloat(precioMaximoInput.value);
+  
+    // Verificar si ambos valores están completos y si el máximo es mayor que el mínimo
+    if (!isNaN(precioMinimo) && !isNaN(precioMaximo) && precioMaximo > precioMinimo) {
+      const productosFiltrados = productsData.filter(product => {
+        const precioProducto = parseFloat(product.cost);
+        return !isNaN(precioProducto) && precioProducto >= precioMinimo && precioProducto <= precioMaximo;
+      });
+  
+      const productListDiv = document.getElementById("productList");
+  
+      let productListHTML = "";
+  
+      productosFiltrados.forEach(product => {
+        productListHTML += `
+        <div class="product list-group-item list-group-item-action cursor-active">
+              <div class="row">
+                <div class="col-3">
+                  <img src="${product.image}" alt="${product.name}" class="img-thumbnail">
                 </div>
-                <p class="mb-1">${product.description}</p>
-                <p class="mb-1">Precio: $${product.cost} ${product.currency}</p>
+                <div class="col">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h4 class="mb-1">${product.name}</h4>
+                    <small class="text-muted">Cantidad Vendida: ${product.soldCount}</small>
+                  </div>
+                  <p class="mb-1">${product.description}</p>
+                  <p class="mb-1">Precio: $${product.cost} ${product.currency}</p>
+                </div>
               </div>
             </div>
-          </div>
-      `;
-    });
-
-    productListDiv.innerHTML = productListHTML;
+        `;
+      });
+  
+      productListDiv.innerHTML = productListHTML;
+      
+      // Ocultar la notificación si estaba visible
+      notificationDiv.classList.remove("show");
+    } else {
+      // Mostrar la notificación de error
+      notificationMessage.textContent = "Por favor, ingresa valores válidos para el rango de precios.";
+      notificationDiv.classList.add("alert-danger", "show");
+      
+      // Ocultar la notificación después de 2 segundos
+      setTimeout(() => {
+        notificationDiv.classList.remove("show");
+      }, 2000);
+    }
   }
-
+  
   document.addEventListener("DOMContentLoaded", loadProducts);
-
+  
   const btnFiltro = document.getElementById("rangeFilterCount");
   btnFiltro.addEventListener("click", filtrarPorPrecio);
-
+  
   const btnLimpiar = document.getElementById("clearRangeFilter");
   btnLimpiar.addEventListener("click", () => {
     document.getElementById("rangeFilterCountMin").value = "";
     document.getElementById("rangeFilterCountMax").value = "";
-        loadProducts();
+    loadProducts();
   });
-
 
  function generateProductList() {
     const productListDiv = document.getElementById("productList");

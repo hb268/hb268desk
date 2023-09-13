@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
           `;
                     const contenedorImagenes = divProducto.querySelector(".productos-imagenes")
-                    for(const srcImagen of product.images){
+                    for (const srcImagen of product.images) {
                         const elementoImagen = document.createElement("img")
                         elementoImagen.src = srcImagen
                         elementoImagen.alt = product.name
@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => {
                 console.error("Error en la solicitud:", error);
             });
+
     }
 })
 
@@ -51,16 +52,16 @@ const main_comment = document.querySelector("main");
 main_comment.appendChild(Comment_div);
 
 
-function loadComment(){
+function loadComment() {
     const idProducto = localStorage.getItem("productoSeleccionado")
-    let URL_comments =  `https://japceibal.github.io/emercado-api/products_comments/${idProducto}.json`;
-    
+    let URL_comments = `https://japceibal.github.io/emercado-api/products_comments/${idProducto}.json`;
+
     getJSONData(URL_comments)
         .then(response => {
-            if(response.status === "ok"){
+            if (response.status === "ok") {
                 const comment = response.data;
 
-                let CommentList =`
+                let CommentList = `
                 <br><br><br><br>
                 <div class="container border">  
                 <table id="comentarios" class="table table-hover table-striped">
@@ -82,25 +83,25 @@ function loadComment(){
                 <tbody id="comentarios">
                 `;
 
-                comment.forEach( com => {
+                comment.forEach(com => {
                     CommentList += `
                 <tr class="container">
                 <td class="col-1"><img src="img/User_icon.webp" class="img-rounded" style="width:15%" ></td>
                 <td class="col-2" >${com.user}</td>
                 <td class="col-3" >${com.description}</td>
                 <td class="col-3 text-center">
-                `
-                    + `<span id="star"class="fa fa-star checked"></span>`.repeat(com.score) +
-                    `<span id="star"class="fa fa-star "></span>`.repeat(5-com.score) +
-                `
+                ` +
+                        `<span id="star"class="fa fa-star checked"></span>`.repeat(com.score) +
+                        `<span id="star"class="fa fa-star "></span>`.repeat(5 - com.score) +
+                        `
                 </td>
                 <td class="col-3 small text-muted" >${com.dateTime}</td>
                 </tr>
                     `;
-                    
+
                 });
-                Comment_div.innerHTML = CommentList + 
-                `</tbody>
+                Comment_div.innerHTML = CommentList +
+                    `</tbody>
                 <table>
                 </div>
                 <br><br><br>
@@ -129,62 +130,106 @@ function loadComment(){
                 
                 `;
                 //DESAFIATE
-                
+
                 function obtenerFechaYHora() {
                     var fechaHora = new Date();
-                    return fechaHora.toLocaleString(); 
-                  }
-                  let fechaHora= obtenerFechaYHora();
+                    var año = fechaHora.getFullYear();
+                    var mes = String(fechaHora.getMonth() + 1).padStart(2, '0');
+                    var dia = String(fechaHora.getDate()).padStart(2, '0');
+                    var horas = String(fechaHora.getHours()).padStart(2, '0');
+                    var minutos = String(fechaHora.getMinutes()).padStart(2, '0');
+                    var segundos = String(fechaHora.getSeconds()).padStart(2, '0');
                 
-                
-                
-                function addNewComment() {
-                    let comentario = document.getElementById("opinion").value;
-                    let score = document.getElementById("score").value;
-                    let nombreU = localStorage.getItem("nombreLogueado");
-                    let arrayComentarios = {dato: nombreU, dato2: comentario, dato3: score, dato4: fechaHora};
-                    let datosJSON = JSON.stringify(arrayComentarios);
+                    return `${año}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
+                }
 
-                    
-                        if (comentario.trim() !== "") {
-                            
-                           sessionStorage.setItem("opinion", datosJSON);
-                           sessionStorage.getItem("opinion");
-                           
-                        
-                        let nuevoComentario = `
-                        <tr class="container">
-                        <td class="col-1"><img src="img/User_icon.webp" class="img-rounded" style="width:15%" ></td>
-                        <td class="col-2">${nombreU}</td>
-                        <td class="col-3">${comentario}</td>
-                        <td class="col-3 text-center">
-                        `
-                            + `<span id="star"class="fa fa-star checked"></span>`.repeat(score) +
-                            `<span id="star"class="fa fa-star "></span>`.repeat(5-score) +
-                        `
-                        </td>
-                        <td class="col-3 small text-muted">${fechaHora}</td>
-                        </tr>
-                        `;
-                
-                let contenedorDeComentarios = document.getElementById("comentarios"); 
-                contenedorDeComentarios.innerHTML += nuevoComentario;
-                            
-                
-                document.getElementById("opinion").value = "";
+                function addNewComment() {
+                    const comentario = document.getElementById("opinion").value;
+                    const score = document.getElementById("score").value;
+                    const nombreU = localStorage.getItem("nombreLogueado");
+                    const idProducto = localStorage.getItem("productoSeleccionado");
+                    const fechaHora = obtenerFechaYHora();
+                    const notificationDiv = document.getElementById("notification");
+                    const notificationMessage = document.getElementById("notification-message");
+
+                    if (comentario.trim() !== "") {
+                        let comentariosGuardados = localStorage.getItem("opinion");
+                        let comentarios = [];
+
+                        if (comentariosGuardados) {
+                            comentarios = JSON.parse(comentariosGuardados);
+                            for (let i = 0; i < comentarios.length; i++) {
+                                if (comentarios[i].productoId === idProducto && comentarios[i].dato === nombreU) {
+                                    notificationMessage.textContent = "¡Ya has comentado para este producto!";
+                                    notificationDiv.classList.add("alert-danger", "show");
+                                    setTimeout(() => {
+                                        notificationDiv.classList.remove("show");
+                                    }, 2000);
+                                    return;
+                                }
+                            }
+                        }
+                        const nuevoComentario = {
+                            productoId: idProducto,
+                            dato: nombreU,
+                            dato2: comentario,
+                            dato3: score,
+                            dato4: fechaHora
+                        };
+                        comentarios.push(nuevoComentario);
+                        localStorage.setItem("opinion", JSON.stringify(comentarios));
+                        if (idProducto === localStorage.getItem("productoSeleccionado")) {
+                            mostrarComentariosGuardados();
+                        }
+
+                        document.getElementById("opinion").value = "";
+                        window.location.reload();
                     }
                 }
-                
-                    
-                    const botonComentario =  document.getElementById("btnComment");
-                    botonComentario.addEventListener("click", addNewComment);
+                const botonComentario = document.getElementById("btnComment");
+                botonComentario.addEventListener("click", addNewComment);
+                mostrarComentariosGuardados()
             } else {
                 console.error("Error", response.data)
             }
-          
         })
 }
 
+function mostrarComentariosGuardados() {
+    const comentariosGuardados = localStorage.getItem("opinion");
+    const idProductoActual = localStorage.getItem("productoSeleccionado");
+
+    if (comentariosGuardados) {
+        const comentarios = JSON.parse(comentariosGuardados);
+        const contenedorDeComentarios = document.getElementById("comentarios");
+
+        if (contenedorDeComentarios) {
+            comentarios.forEach((comentario) => {
+                if (comentario.productoId === idProductoActual) {
+                    const nuevoComentario = `
+                        <tr class="container">
+                            <td class="col-1"><img src="img/User_icon.webp" class="img-rounded" style="width:15%" ></td>
+                            <td class="col-2">${comentario.dato}</td>
+                            <td class="col-3">${comentario.dato2}</td>
+                            <td class="col-3 text-center">
+                                ${'<span id="star" class="fa fa-star checked"></span>'.repeat(comentario.dato3)}
+                                ${'<span id="star" class="fa fa-star "></span>'.repeat(5 - comentario.dato3)}
+                            </td>
+                            <td class="col-3 small text-muted">${comentario.dato4}</td>
+                        </tr>
+                    `;
+                    contenedorDeComentarios.innerHTML += nuevoComentario;
+                }
+            });
+        } else {
+            console.log("El elemento 'comentarios' no se encontró en la página.");
+        }
+    } else {
+        console.log("No se encontraron comentarios guardados en localStorage.");
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", mostrarComentariosGuardados);
 
 document.addEventListener("DOMContentLoaded", loadComment);
-
