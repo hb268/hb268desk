@@ -148,8 +148,8 @@ function loadComment(){
                     
                         if (comentario.trim() !== "") {
                             
-                           sessionStorage.setItem("opinion", datosJSON);
-                           sessionStorage.getItem("opinion");
+                           localStorage.setItem("opinion", datosJSON);
+                           localStorage.getItem("opinion");
                            
                         
                         let nuevoComentario = `
