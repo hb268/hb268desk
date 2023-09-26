@@ -130,3 +130,10 @@ document.addEventListener("DOMContentLoaded", function () {
       showNotification(message, "danger");
     }
   });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const modoPreferido = localStorage.getItem("modo-preferido");
+    if (modoPreferido === "modo-noche") {
+      document.body.classList.add("modo-noche");
+    }
+  });

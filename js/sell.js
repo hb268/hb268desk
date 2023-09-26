@@ -38,6 +38,11 @@ document.addEventListener("DOMContentLoaded", function(e){
         updateTotalCosts();
     });
 
+    document.getElementById("goldradio").checked = true;
+    comissionPercentage = 0.13;
+    updateTotalCosts();
+    document.getElementById("productCurrency").value = PESO_CURRENCY;
+
     document.getElementById("goldradio").addEventListener("change", function(){
         comissionPercentage = 0.13;
         updateTotalCosts();
@@ -147,3 +152,4 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     });
 });
+

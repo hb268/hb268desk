@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginLink = document.getElementById("loginLink");
   const estaLogueado = localStorage.getItem("logueado") === "true";
   if (estaLogueado) {
-      loginLink.innerHTML = "Logout";
+      loginLink.innerHTML = "Cerrar sesión";
       loginLink.addEventListener("click", () => {
           logout();
       });
@@ -71,4 +71,48 @@ function DirigirALogin(){
 document.addEventListener("DOMContentLoaded", function(){
   var nameLogueado = localStorage.getItem('nombreLogueado');
   document.getElementById("nombreLogin").innerHTML=nameLogueado
+});
+
+document.getElementById("cerrarSesionDesplegable").addEventListener("click", () => {
+  logout();
+});
+
+function cambiarModo() {
+    const modoActual = localStorage.getItem("modo-preferido");
+    if (modoActual === "modo-noche") {
+        localStorage.setItem("modo-preferido", "modo-dia");
+        document.body.classList.remove("modo-noche");
+        const buttons = document.querySelectorAll(".btn");
+        buttons.forEach(button => {
+            button.classList.remove("custom-btn-color");
+            button.classList.add("btn-light");
+        });
+    } else {
+        localStorage.setItem("modo-preferido", "modo-noche");
+        document.body.classList.add("modo-noche");
+        const buttons = document.querySelectorAll(".btn");
+        buttons.forEach(button => {
+            button.classList.remove("btn-light");
+            button.classList.add("custom-btn-color");
+        });
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const modoActual = localStorage.getItem("modo-preferido");
+    if (modoActual === "modo-noche") {
+        document.body.classList.add("modo-noche");
+        const buttons = document.querySelectorAll(".btn");
+        buttons.forEach(button => {
+            button.classList.remove("btn-light");
+            button.classList.add("custom-btn-color");
+        });
+    } else {
+        document.body.classList.remove("modo-noche");
+        const buttons = document.querySelectorAll(".btn");
+        buttons.forEach(button => {
+            button.classList.remove("custom-btn-color");
+            button.classList.add("btn-light");
+        });
+    }
 });

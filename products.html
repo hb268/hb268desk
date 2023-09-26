@@ -30,8 +30,19 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" id="nombreLogin">...</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="nombreLoginDropdown" role="button" data-bs-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <span id="nombreLogin">Usuario</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="nombreLoginDropdown">
+              <a class="dropdown-item" href="cart.html">Mi carrito</a>
+              <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#" id="cerrarSesionDesplegable">Cerrar sesión</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" onclick="cambiarModo()" id="modoBtn" class="btn btn-sm btn-outline-light">Modo día</a>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="loginLink" href="login.html">Login</a>
@@ -93,13 +104,12 @@
     </div>
   </div>
   <div id="productos"></div>
-  <footer class="text-muted">
-    <div class="container">
+  <footer class="text-muted mt-5" >
+    <div class="container footer">
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
-      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
   <div id="spinner-wrapper">

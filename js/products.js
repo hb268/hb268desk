@@ -68,8 +68,6 @@ function loadProducts() {
   
     const precioMinimo = parseFloat(precioMinimoInput.value);
     const precioMaximo = parseFloat(precioMaximoInput.value);
-  
-    // Verificar si ambos valores están completos y si el máximo es mayor que el mínimo
     if (!isNaN(precioMinimo) && !isNaN(precioMaximo) && precioMaximo > precioMinimo) {
       const productosFiltrados = productsData.filter(product => {
         const precioProducto = parseFloat(product.cost);
@@ -101,15 +99,10 @@ function loadProducts() {
       });
   
       productListDiv.innerHTML = productListHTML;
-      
-      // Ocultar la notificación si estaba visible
       notificationDiv.classList.remove("show");
     } else {
-      // Mostrar la notificación de error
       notificationMessage.textContent = "Por favor, ingresa valores válidos para el rango de precios.";
       notificationDiv.classList.add("alert-danger", "show");
-      
-      // Ocultar la notificación después de 2 segundos
       setTimeout(() => {
         notificationDiv.classList.remove("show");
       }, 2000);
@@ -154,29 +147,18 @@ function loadProducts() {
   
     productListDiv.innerHTML = productListHTML;
   }
-  
-// Agrega un evento de clic al botón "Ordenar por Precio Ascendente"
+
 document.getElementById("sortAsc").addEventListener("click", function () {
-  
-  // Ordena el array productsData por precio de manera ascendente
   productsData.sort(function(a, b) {
     return a.cost - b.cost;
   });
-
-  // Vuelve a generar la lista de productos ordenados por precio
   generateProductList();
 });
 
-
-// Agrega un evento de clic al botón "Ordenar por Precio Ascendente"
 document.getElementById("sortDesc").addEventListener("click", function () {
-  
-  // Ordena el array productsData por precio de manera ascendente
   productsData.sort(function(a, b) {
     return b.cost - a.cost;
   });
-
-  // Vuelve a generar la lista de productos ordenados por precio
   generateProductList();
 });
 

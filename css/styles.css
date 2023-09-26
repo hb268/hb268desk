@@ -5,6 +5,7 @@
   font-family: 'Verdana', serif !important;
 }
 
+
 .jumbotron .display-4 {
   font-weight: bold;
 }
@@ -185,16 +186,20 @@ a.custom-card:hover {
   color: orange;
 }
 
-#loginGeneral {
+#mainLogin{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 125vh;
-  margin: 0;
-  background-image: url(/img/header.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  flex-direction: column;
+  min-height: 60vh;
+}
+
+#imagenLogin {
+  height: 40vh;
+  background-color: #53C0FB;
+  background: url('../img/login.png');
   background-position: center;
+  background-repeat: no-repeat;
+  color: black;
+  font-weight: bold;
 }
 
 #loginContainer {
@@ -206,6 +211,7 @@ a.custom-card:hover {
   width: 100%;
   text-align: center;
   overflow: hidden;
+  flex-grow: 1;
 }
 
 .form {
@@ -221,47 +227,267 @@ a.custom-card:hover {
   opacity: 0;
   overflow: hidden;
 }
-/* 
-.product{
-  padding: auto;
-  margin-top: 5%;
-  margin: auto;
-  width: 70%;
-  height: 50%;
-  border: 5px solid black;
-  background-color: rgba(219, 215, 215, 0.5);
-  float: inherit;
-
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.product .img {
-  flex: 1;
-}
-
-.product .img img {
-  max-width: 100%;
-  height: auto;
-}
-
-.product .col {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.product .caract h2 {
-  margin: 0;
-}
-
-.product .ventas p {
-  margin: 0;
-} */
 
 #productList {
   width: 75%;
   margin: 0 auto;
+}
+
+
+body.modo-noche #imagenLogin {
+  color: #fff; 
+}
+
+body.modo-noche .form-control::placeholder {
+  color: #fff;
+}
+
+body.modo-noche .form-check-input[type="checkbox"] {
+  background-color: #8b8b8b; 
+}
+
+body.modo-noche #loginContainer {
+  background-color: #2C2E30;
+  color: #fff;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);/
+}
+
+body.modo-noche .btn-dark {
+  background-color: #000;
+  border-color: #000; 
+  color: #fff; 
+}
+
+body.modo-noche .form-check-label {
+  color: #fff;
+}
+
+body.modo-noche #switchLoginRegistro:checked + .form-check-label::before {
+  background-color: initial;
+}
+
+body.modo-noche .form-control {
+  background-color: #2C2E30;
+  color: #fff;
+}
+
+body.modo-noche #imagenLogin {
+  height: 40vh;
+  background-color: #53C0FB;
+  background: url('../img/login_black.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  color: black;
+  font-weight: bold;
+}
+
+body.modo-noche .jumbotron {
+  background-image: url('../img/cover_back_black.png');
+  color: white; 
+}
+
+body.modo-noche .album {
+  background-color: #3B3D3D;
+  color: white;
+}
+
+body .album {
+  background-color: #F8F9FA;
+}
+
+.modo-noche .card-body {
+  background-color: #212529;
+  color: #fff;
+}
+
+.modo-noche .site-header a {
+  color: #fff;
+}
+
+.modo-noche .card{
+  background-color: #212529;
+  color: #ffffff;
+}
+
+
+body,
+body.modo-noche {
+  background-color: #fff; 
+  color: #3B3D3D;
+}
+
+body.modo-noche {
+  background-color: #3B3D3D;
+  color: #fff;
+}
+
+input,
+select,
+textarea {
+  background-color: #fff; 
+  color: #3B3D3D;
+  border: 1px solid #ccc; 
+}
+
+body.modo-noche input,
+body.modo-noche select,
+body.modo-noche textarea {
+  background-color: #2C2E30;
+  color: #fff; 
+  border: 1px solid #555; 
+}
+
+#file-upload {
+  background-color: #fff; 
+  color: #3B3D3D; 
+  border: 1px dashed #ccc; 
+  padding: 10px;
+  text-align: center;
+}
+
+body.modo-noche #file-upload {
+  background-color: #2C2E30; 
+  color: #fff;
+  border: 1px dashed #555;
+}
+
+.list-group-item {
+  background-color: #fff;
+  color: #3B3D3D;
+  border: 1px solid #ccc;
+}
+
+body.modo-noche .list-group-item {
+  background-color: #2C2E30;
+  color: #fff;
+  border: 1px solid #555; 
+}
+
+table#comentariosCargados td, table#comentariosCargados tr {
+  color: #3B3D3D;
+}
+
+body.modo-noche table#comentariosCargados td {
+  color: #fff;
+}
+
+body.modo-noche th{
+  color: #fff;
+}
+
+.btn.btn-light {
+  background-color: #fff; 
+  color: #000; 
+  border-color: #CED4DA; 
+}
+
+.btn.btn-light + label {
+  background-color: #fff; 
+  color: #000; 
+  border-color: #CED4DA; 
+}
+
+body.modo-noche .btn.btn-light {
+  background-color: #2C2E30; 
+  color: #fff;
+  border-color: #555;
+}
+
+body.modo-noche .btn.btn-light + label {
+  background-color: #2C2E30;
+  color: #fff;
+  border-color: #555; 
+}
+
+.btn.btn-light[for="sortByCount"] {
+  background-color: #fff;
+  color: #000; 
+  border-color: #2C2E30; 
+  border-width: 11x;
+  border-style: solid;
+}
+
+body.modo-noche .btn.btn-light[for="sortByCount"] {
+  background-color: #2C2E30; 
+  color: #fff; 
+}
+
+body.modo-noche footer{
+  background-color: #212529;
+}
+
+body.modo-noche #contidionsModal .modal-content {
+  background-color: #2C2E30;
+  color: #fff;
+}
+
+body.modo-noche #contidionsModal .modal-header {
+  background-color: #3C4043;
+  border-bottom: 1px solid #555;
+}
+
+body.modo-noche #contidionsModal .modal-title {
+  color: #fff;
+}
+
+body.modo-noche #contidionsModal .modal-body {
+  background-color: #2C2E30;
+}
+
+body.modo-noche #contidionsModal .text-warning,
+body.modo-noche #contidionsModal .text-primary,
+body.modo-noche #contidionsModal .text-secondary {
+  color: #fff;
+}
+
+body.modo-noche #contidionsModal .modal-footer {
+  background-color: #3C4043;
+  border-top: 1px solid #555; 
+}
+
+body.modo-noche #contidionsModal .btn-primary {
+  background-color: #007BFF;
+  color: #fff;
+}
+
+body.modo-noche #contidionsModal hr {
+  background-color: #555;
+}
+
+body.modo-noche .dropdown-menu {
+  background-color: #2C2E30;
+}
+
+body.modo-noche .dropdown-menu a.dropdown-item {
+  color: #fff;
+}
+
+body.modo-noche .dropdown-menu .dropdown-divider {
+  background-color: #555;
+}
+
+td {
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.modo-noche td{
+  border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+tr{
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.modo-noche tr{
+  border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+.custom-btn-color {
+  background-color: #2C2E30;
+  color: #fff; 
+  transition: color 0.3s; 
+}
+
+.custom-btn-color:hover {
+  color: #fff;
 }
