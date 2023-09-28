@@ -78,41 +78,56 @@ document.getElementById("cerrarSesionDesplegable").addEventListener("click", () 
 });
 
 function cambiarModo() {
-    const modoActual = localStorage.getItem("modo-preferido");
-    if (modoActual === "modo-noche") {
-        localStorage.setItem("modo-preferido", "modo-dia");
-        document.body.classList.remove("modo-noche");
-        const buttons = document.querySelectorAll(".btn");
-        buttons.forEach(button => {
-            button.classList.remove("custom-btn-color");
-            button.classList.add("btn-light");
-        });
-    } else {
-        localStorage.setItem("modo-preferido", "modo-noche");
-        document.body.classList.add("modo-noche");
-        const buttons = document.querySelectorAll(".btn");
-        buttons.forEach(button => {
-            button.classList.remove("btn-light");
-            button.classList.add("custom-btn-color");
-        });
-    }
+  const modoActual = localStorage.getItem("modo-preferido");
+  const toggleButton = document.getElementById("toggleButton");
+  const toggleIcon = document.getElementById("toggleButtonIcon");
+  const toggleText = document.getElementById("toggleButtonText");
+
+  if (modoActual === "modo-noche") {
+    localStorage.setItem("modo-preferido", "modo-dia");
+    document.body.classList.remove("modo-noche");
+    toggleIcon.classList.remove("fa-moon");
+    toggleIcon.classList.add("fa-sun");
+    toggleText.textContent = "Modo dia";
+    toggleButton.classList.remove("btn-dark");
+    toggleButton.classList.add("btn-light");
+    toggleButton.style.backgroundColor = '';
+    toggleButton.style.border = '1px solid gray';
+  } else {
+    localStorage.setItem("modo-preferido", "modo-noche");
+    document.body.classList.add("modo-noche");
+    toggleIcon.classList.remove("fa-sun");
+    toggleIcon.classList.add("fa-moon");
+    toggleText.textContent = "Modo noche";
+    toggleButton.classList.remove("btn-light");
+    toggleButton.classList.add("btn-dark");
+    toggleButton.style.backgroundColor = "#2C2E30";
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    const modoActual = localStorage.getItem("modo-preferido");
-    if (modoActual === "modo-noche") {
-        document.body.classList.add("modo-noche");
-        const buttons = document.querySelectorAll(".btn");
-        buttons.forEach(button => {
-            button.classList.remove("btn-light");
-            button.classList.add("custom-btn-color");
-        });
-    } else {
-        document.body.classList.remove("modo-noche");
-        const buttons = document.querySelectorAll(".btn");
-        buttons.forEach(button => {
-            button.classList.remove("custom-btn-color");
-            button.classList.add("btn-light");
-        });
-    }
+  const modoActual = localStorage.getItem("modo-preferido");
+  const toggleButton = document.getElementById("toggleButton");
+  const toggleIcon = document.getElementById("toggleButtonIcon");
+  const toggleText = document.getElementById("toggleButtonText");
+
+  if (modoActual === "modo-noche") {
+    document.body.classList.add("modo-noche");
+    toggleIcon.classList.add("fa-moon");
+    toggleText.textContent = "Modo noche";
+    toggleButton.classList.remove("btn-light");
+    toggleButton.classList.add("btn-dark");
+    toggleButton.style.backgroundColor = "#2C2E30";
+    toggleButton.style.border = '1px solid gray';
+  } else {
+    toggleText.textContent = "Modo dia";
+    toggleIcon.classList.add("fa-sun");
+    toggleButton.classList.remove("btn-dark");
+    toggleButton.classList.add("btn-light");
+    toggleButton.style.border = '1px solid gray';
+  }
+
+  toggleButton.addEventListener("click", () => {
+    cambiarModo();
+  });
 });

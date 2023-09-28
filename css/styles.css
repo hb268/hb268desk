@@ -233,6 +233,16 @@ a.custom-card:hover {
   margin: 0 auto;
 }
 
+#toggleButtonText{
+  padding-left: 5px;
+  font-size: 14px;
+}
+
+.center-button {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
 
 body.modo-noche #imagenLogin {
   color: #fff; 
@@ -460,6 +470,10 @@ body.modo-noche .dropdown-menu {
 
 body.modo-noche .dropdown-menu a.dropdown-item {
   color: #fff;
+}
+
+body.modo-noche .dropdown-menu a.dropdown-item:hover {
+  background-color: #383838;
 }
 
 body.modo-noche .dropdown-menu .dropdown-divider {
