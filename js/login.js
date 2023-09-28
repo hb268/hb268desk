@@ -117,12 +117,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   
     function loginSuccess() {
+      // Ocultar el botón y mostrar el spinner
+      document.getElementById("btnAcceder").classList.add("d-none");
+      document.getElementById("spinner").classList.remove("d-none");
+    
       showNotification("Acceso correcto.", "warning");
       localStorage.setItem("logueado", "true");
       localStorage.setItem("nombreLogueado", usernameLogin.value);
-  
+    
       setTimeout(() => {
-        window.location.href = "index.html"; 
+        window.location.href = "index.html";
       }, 2500);
     }
   
