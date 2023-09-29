@@ -244,8 +244,35 @@ function mostrarComentariosGuardados() {
         }
     }
 }
-
-
 document.addEventListener("DOMContentLoaded", mostrarComentariosGuardados);
 
 document.addEventListener("DOMContentLoaded", loadComment);
+
+
+//mostrar el related product:
+const productoID = localStorage.getItem("productoSeleccionado");
+const produRelacionado = `https://japceibal.github.io/emercado-api/products/${productoID}.json`;
+
+
+fetch(produRelacionado)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`La solicitud falló con estado ${response.status}`);
+    }
+    return response.json();
+  })
+    .then((productData) => {
+        
+        const divRela = document.getElementById('relacionados')
+        divRela.innerHTML += `<h2>PRODUCTOS RELACIONADOS</h2>
+            <p>${productData.relatedProducts[0].name}</p>
+            <p><img src="${productData.relatedProducts[0].image}" width = "90px" alt="Imagen del producto"></p><br>
+            <p>${productData.relatedProducts[1].name}</p>
+            <p><img src="${productData.relatedProducts[1].image}" width = "90px" alt="Imagen del producto"></p>
+
+            `;
+
+  })
+  .catch((error) => {
+    console.error("Hubo un error al obtener los datos de la API:", error);
+  })
