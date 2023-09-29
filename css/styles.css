@@ -505,3 +505,9 @@ tr{
 .custom-btn-color:hover {
   color: #fff;
 }
+
+.custom-thumbnail {
+  padding: 5px;
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+}

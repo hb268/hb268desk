@@ -108,9 +108,9 @@ function loadComment() {
                             <td class="col-3" >${com.description}</td>
                             <td class="col-3 text-center">
                             ` +
-                                    `<span id="star"class="fa fa-star checked"></span>`.repeat(com.score) +
-                                    `<span id="star"class="fa fa-star "></span>`.repeat(5 - com.score) +
-                                    `
+                        `<span id="star"class="fa fa-star checked"></span>`.repeat(com.score) +
+                        `<span id="star"class="fa fa-star "></span>`.repeat(5 - com.score) +
+                        `
                             </td>
                             <td class="col-3 small text-muted" >${com.dateTime}</td>
                         </tr>
@@ -154,7 +154,7 @@ function loadComment() {
                     var horas = String(fechaHora.getHours()).padStart(2, '0');
                     var minutos = String(fechaHora.getMinutes()).padStart(2, '0');
                     var segundos = String(fechaHora.getSeconds()).padStart(2, '0');
-                
+
                     return `${año}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
                 }
 
@@ -166,7 +166,14 @@ function loadComment() {
                     const fechaHora = obtenerFechaYHora();
                     const notificationDiv = document.getElementById("notification");
                     const notificationMessage = document.getElementById("notification-message");
-
+                    if (comentario.trim() === "") {
+                        notificationMessage.textContent = "¡No has escrito ningún comentario!";
+                        notificationDiv.classList.add("alert-warning", "show");
+                        setTimeout(() => {
+                            notificationDiv.classList.remove("show");
+                        }, 2000);
+                        return;
+                    }
                     if (comentario.trim() !== "") {
                         let comentariosGuardados = localStorage.getItem("opinion");
                         let comentarios = [];
@@ -201,9 +208,10 @@ function loadComment() {
                         window.location.reload();
                     }
                 }
+
                 const botonComentario = document.getElementById("btnComment");
                 botonComentario.addEventListener("click", addNewComment);
-                mostrarComentariosGuardados()
+                mostrarComentariosGuardados();
             } else {
                 console.error("Error", response.data)
             }
@@ -248,31 +256,47 @@ document.addEventListener("DOMContentLoaded", mostrarComentariosGuardados);
 
 document.addEventListener("DOMContentLoaded", loadComment);
 
-
-//mostrar el related product:
 const productoID = localStorage.getItem("productoSeleccionado");
 const produRelacionado = `https://japceibal.github.io/emercado-api/products/${productoID}.json`;
 
 
 fetch(produRelacionado)
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(`La solicitud falló con estado ${response.status}`);
-    }
-    return response.json();
-  })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`La solicitud falló con estado ${response.status}`);
+        }
+        return response.json();
+    })
     .then((productData) => {
-        
-        const divRela = document.getElementById('relacionados')
-        divRela.innerHTML += `<h2>PRODUCTOS RELACIONADOS</h2>
-            <p>${productData.relatedProducts[0].name}</p>
-            <p><img src="${productData.relatedProducts[0].image}" width = "90px" alt="Imagen del producto"></p><br>
-            <p>${productData.relatedProducts[1].name}</p>
-            <p><img src="${productData.relatedProducts[1].image}" width = "90px" alt="Imagen del producto"></p>
+        const divRela = document.getElementById('relacionados');
+        divRela.innerHTML = `
+      <h5 class="mt-4">Productos relacionados</h5>
+      <div class="row container">
+    `;
 
-            `;
+        productData.relatedProducts.forEach((product) => {
+            divRela.querySelector('.row').innerHTML += `
+        <div class="product col-md-3 cursor-active" id=${product.id}>
+          <div class="text-left">
+            <img src="${product.image}" class="img-fluid custom-thumbnail" alt="Imagen del producto" width="300" style="border-radius: 4px;">
+            <p class="mt-2">${product.name}</p>
+          </div>
+        </div>
+      `;
+        });
 
-  })
-  .catch((error) => {
-    console.error("Hubo un error al obtener los datos de la API:", error);
-  })
+        divRela.innerHTML += `
+      </div>
+    `;
+        const idDelDiv = document.querySelectorAll(".product")
+        idDelDiv.forEach(div => {
+            div.addEventListener("click", function () {
+                const idDelProducto = this.getAttribute("id")
+                localStorage.setItem("productoSeleccionado", idDelProducto)
+                window.location.href = "product-info.html"
+            })
+        })
+    })
+    .catch((error) => {
+        console.error("Hubo un error al obtener los datos de la API:", error);
+    });

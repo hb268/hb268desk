@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("btnAcceder").classList.add("d-none");
       document.getElementById("spinner").classList.remove("d-none");
     
-      showNotification("Acceso correcto.", "warning");
+      showNotification("Acceso correcto.", "success");
       localStorage.setItem("logueado", "true");
       localStorage.setItem("nombreLogueado", usernameLogin.value);
     
