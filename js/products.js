@@ -23,21 +23,21 @@ function loadProducts() {
 
         products.forEach(product => {
           productListHTML += `
-            <div class="product list-group-item list-group-item-action cursor-active" id=${product.id}>
-            <div class="row">
-              <div class="col-3">
-                <img src="${product.image}" alt="${product.name}" class="img-thumbnail">
+          <div class="product list-group-item list-group-item-action cursor-active" id="${product.id}">
+          <div class="row">
+              <div class="col-12 col-md-3">
+                  <img src="${product.image}" alt="${product.name}" class="img-thumbnail img-fluid">
               </div>
               <div class="col">
-                <div class="d-flex w-100 justify-content-between">
-                  <h4 class="mb-1">${product.name}</h4>
-                  <small class="text-muted">Cantidad Vendida: ${product.soldCount}</small>
-                </div>
-                <p class="mb-1">${product.description}</p>
-                <p class="mb-1">Precio: $${product.cost} ${product.currency}</p>
+                  <div class="d-flex w-100 justify-content-between">
+                      <h4 class="mb-1">${product.name}</h4>
+                      <small class="text-muted">Cantidad Vendida: ${product.soldCount}</small>
+                  </div>
+                  <p class="mb-1">${product.description}</p>
+                  <p class="mb-1">Precio: $${product.cost} ${product.currency}</p>
               </div>
-            </div>
           </div>
+      </div>
             `;
         });
 
@@ -80,21 +80,21 @@ function filtrarPorPrecio() {
 
     productosFiltrados.forEach(product => {
       productListHTML += `
-      <div class="product list-group-item list-group-item-action cursor-active" id=${product.id}>
-              <div class="row">
-                <div class="col-3">
-                  <img src="${product.image}" alt="${product.name}" class="img-thumbnail">
-                </div>
-                <div class="col">
-                  <div class="d-flex w-100 justify-content-between">
+      <div class="product list-group-item list-group-item-action cursor-active" id="${product.id}">
+        <div class="row">
+            <div class="col-12 col-md-3">
+                <img src="${product.image}" alt="${product.name}" class="img-thumbnail img-fluid">
+            </div>
+            <div class="col">
+                <div class="d-flex w-100 justify-content-between">
                     <h4 class="mb-1">${product.name}</h4>
                     <small class="text-muted">Cantidad Vendida: ${product.soldCount}</small>
-                  </div>
-                  <p class="mb-1">${product.description}</p>
-                  <p class="mb-1">Precio: $${product.cost} ${product.currency}</p>
                 </div>
-              </div>
+                <p class="mb-1">${product.description}</p>
+                <p class="mb-1">Precio: $${product.cost} ${product.currency}</p>
             </div>
+        </div>
+    </div>
         `;
     });
     productListDiv.innerHTML = productListHTML;
@@ -134,21 +134,21 @@ function generateProductList() {
 
   productsData.forEach(product => {
     productListHTML += `
-    <div class="product list-group-item list-group-item-action cursor-active" id=${product.id}>
-            <div class="row">
-              <div class="col-3">
-                <img src="${product.image}" alt="${product.name}" class="img-thumbnail">
-              </div>
-              <div class="col">
-                <div class="d-flex w-100 justify-content-between">
+    <div class="product list-group-item list-group-item-action cursor-active" id="${product.id}">
+      <div class="row">
+          <div class="col-12 col-md-3">
+              <img src="${product.image}" alt="${product.name}" class="img-thumbnail img-fluid">
+          </div>
+          <div class="col">
+              <div class="d-flex w-100 justify-content-between">
                   <h4 class="mb-1">${product.name}</h4>
                   <small class="text-muted">Cantidad Vendida: ${product.soldCount}</small>
-                </div>
-                <p class="mb-1">${product.description}</p>
-                <p class="mb-1">Precio: $${product.cost} ${product.currency}</p>
               </div>
-            </div>
+              <p class="mb-1">${product.description}</p>
+              <p class="mb-1">Precio: $${product.cost} ${product.currency}</p>
           </div>
+      </div>
+  </div>
       `;
   });
   productListDiv.innerHTML = productListHTML;
@@ -219,21 +219,21 @@ function mostrarProductos(productos) {
 
   productos.forEach(product => {
     productListHTML += `
-    <div class="product list-group-item list-group-item-action cursor-active" id=${product.id}>
-        <div class="row">
-          <div class="col-3">
-            <img src="${product.image}" alt="${product.name}" class="img-thumbnail">
+    <div class="product list-group-item list-group-item-action cursor-active" id="${product.id}">
+      <div class="row">
+          <div class="col-12 col-md-3">
+              <img src="${product.image}" alt="${product.name}" class="img-thumbnail img-fluid">
           </div>
           <div class="col">
-            <div class="d-flex w-100 justify-content-between">
-              <h4 class="mb-1">${product.name}</h4>
-              <small class="text-muted">Cantidad Vendida: ${product.soldCount}</small>
-            </div>
-            <p class="mb-1">${product.description}</p>
-            <p class="mb-1">Precio: $${product.cost} ${product.currency}</p>
+              <div class="d-flex w-100 justify-content-between">
+                  <h4 class="mb-1">${product.name}</h4>
+                  <small class="text-muted">Cantidad Vendida: ${product.soldCount}</small>
+              </div>
+              <p class="mb-1">${product.description}</p>
+              <p class="mb-1">Precio: $${product.cost} ${product.currency}</p>
           </div>
-        </div>
       </div>
+  </div>
     `;
   });
   productListDiv.innerHTML = productListHTML;

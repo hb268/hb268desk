@@ -196,10 +196,45 @@ a.custom-card:hover {
   height: 40vh;
   background-color: #53C0FB;
   background: url('../img/login.png');
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   color: black;
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  #imagenLogin {
+    height: 25vh;
+    background-image: url('../img/login.png'); 
+    background-size: cover;
+  }
+}
+
+@media (max-width: 768px) {
+  .jumbotron {
+    height: 30vh;
+    background-image: url('../img/cover_back.png'); 
+    background-size: cover;
+    background-position: left -110px center;
+  }
+}
+
+@media (max-width: 992) {
+  .jumbotron {
+    height: 30vh;
+    background-image: url('../img/cover_back.png'); 
+    background-size: cover;
+    background-position: left -110px center;
+  }
+}
+
+@media (max-width: 1920px) {
+  .jumbotron {
+    background-image: url('../img/cover_back.png'); 
+    background-size: cover;
+    background-position: left -110px center;
+  }
 }
 
 #loginContainer {
