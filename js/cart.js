@@ -1,7 +1,8 @@
 var userId = 25801;
 const apiUrl = `https://japceibal.github.io/emercado-api/user_cart/${userId}.json`;
 
-const tablaProductosBody = document.getElementById("tablaProductosBody").addEventListener("DOMContentLoaded", () => { 
+const tablaProductosBody = document.getElementById("tablaProductosBody");
+addEventListener("DOMContentLoaded", () => { 
 
     fetch(apiUrl)
     .then(response => response.json())
