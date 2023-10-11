@@ -131,3 +131,22 @@ document.addEventListener("DOMContentLoaded", function () {
     cambiarModo();
   });
 });
+
+// Creación del botón de compra
+let cartbtn = document.createElement("button");
+let cartbtntext = document.createTextNode(" Comprar ");
+cartbtn.appendChild(cartbtntext);
+cartbtn.classList.add("btn");
+cartbtn.classList.add("btn-success");
+
+const carthtml = "cart.html";
+let productcart = [] || JSON.parse(localStorage.getItem('cart'));
+
+cartbtn.addEventListener("click", () => {
+  productcart.push(product)
+  localStorage.setItem('cart', JSON.stringify(productcart))
+  alert("Agregado al Carrito");
+  console.log(productcart);
+  window.location.href = carthtml
+})
+

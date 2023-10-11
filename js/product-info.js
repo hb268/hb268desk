@@ -1,3 +1,9 @@
+const divProducto = document.createElement("div");
+const containerProducto = document.getElementById("products-info");
+containerProducto.appendChild(cartbtn);
+let product;
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const idProducto = localStorage.getItem("productoSeleccionado");
     if (idProducto) {
@@ -5,11 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
         getJSONData(urlProductsInfo)
             .then(response => {
                 if (response.status === "ok") {
-                    const product = response.data;
-                    const containerProducto = document.getElementById("products-info");
-                    containerProducto.innerHTML = "";
-
-                    const divProducto = document.createElement("div");
+                    product = response.data;
+                    
                     divProducto.innerHTML = `
                     <div class="container">
                         <div class="row">
