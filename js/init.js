@@ -132,7 +132,24 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Creación del botón de compra
+// // Creación del botón de compra
+// let cartbtn = document.createElement("button");
+// let cartbtntext = document.createTextNode(" Comprar ");
+// cartbtn.appendChild(cartbtntext);
+// cartbtn.classList.add("btn");
+// cartbtn.classList.add("btn-success");
+
+// const carthtml = "cart.html";
+// let productcart = [] || JSON.parse(localStorage.getItem('cart'));
+
+// cartbtn.addEventListener("click", () => {
+//   productcart.push(product)
+//   localStorage.setItem('cart', JSON.stringify(productcart))
+//   alert("Agregado al Carrito");
+//   console.log(productcart);
+//   window.location.href = carthtml
+// })
+
 let cartbtn = document.createElement("button");
 let cartbtntext = document.createTextNode(" Comprar ");
 cartbtn.appendChild(cartbtntext);
@@ -140,13 +157,31 @@ cartbtn.classList.add("btn");
 cartbtn.classList.add("btn-success");
 
 const carthtml = "cart.html";
-let productcart = [] || JSON.parse(localStorage.getItem('cart'));
+let productcart = JSON.parse(localStorage.getItem('cart')) || [];
 
 cartbtn.addEventListener("click", () => {
-  productcart.push(product)
-  localStorage.setItem('cart', JSON.stringify(productcart))
-  alert("Agregado al Carrito");
-  console.log(productcart);
-  window.location.href = carthtml
-})
+  const productcart = JSON.parse(localStorage.getItem('cart')) || [];
 
+  if (isProductInCart(product)) {
+    alert("Este producto ya está en el carrito.");
+  } else {
+    productcart.push(product);
+    localStorage.setItem('cart', JSON.stringify(productcart));
+    alert("Agregado al Carrito");
+    console.log(productcart);
+    window.location.href = carthtml;
+  }
+});
+
+function isProductInCart(product) {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const productId = product.id;
+
+  for (const item of cart) {
+    if (item.id === productId) {
+      return true; 
+    }
+  }
+
+  return false; 
+}
