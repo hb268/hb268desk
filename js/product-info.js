@@ -1,8 +1,12 @@
 const divProducto = document.createElement("div");
 const containerProducto = document.getElementById("products-info");
-containerProducto.appendChild(cartbtn);
+   
+addEventListener("DOMContentLoaded", () => {
+    main_comment.insertBefore(btndiv, Comment_div)
+     btndiv.appendChild(cartbtn)
+ })
+    
 let product;
-
 
 document.addEventListener("DOMContentLoaded", function () {
     const idProducto = localStorage.getItem("productoSeleccionado");

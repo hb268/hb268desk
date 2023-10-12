@@ -132,11 +132,18 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Creación del botón de compra
 let cartbtn = document.createElement("button");
 let cartbtntext = document.createTextNode(" Comprar ");
 cartbtn.appendChild(cartbtntext);
 cartbtn.classList.add("btn");
 cartbtn.classList.add("btn-success");
+
+//Ubicacion del Botón
+let btndiv = document.createElement("div");
+btndiv.classList.add("col-12");
+btndiv.classList.add("text-center");
+btndiv.classList.add("btn-hover");
 
 const carthtml = "cart.html";
 let productcart = JSON.parse(localStorage.getItem('cart')) || [];
