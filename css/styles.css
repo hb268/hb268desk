@@ -186,7 +186,7 @@ a.custom-card:hover {
   color: orange;
 }
 
-#mainLogin{
+#mainLogin {
   display: flex;
   flex-direction: column;
   min-height: 60vh;
@@ -206,7 +206,7 @@ a.custom-card:hover {
 @media (max-width: 768px) {
   #imagenLogin {
     height: 25vh;
-    background-image: url('../img/login.png'); 
+    background-image: url('../img/login.png');
     background-size: cover;
   }
 }
@@ -214,7 +214,7 @@ a.custom-card:hover {
 @media (max-width: 768px) {
   .jumbotron {
     height: 30vh;
-    background-image: url('../img/cover_back.png'); 
+    background-image: url('../img/cover_back.png');
     background-size: cover;
     background-position: left -110px center;
   }
@@ -223,7 +223,7 @@ a.custom-card:hover {
 @media (max-width: 992) {
   .jumbotron {
     height: 30vh;
-    background-image: url('../img/cover_back.png'); 
+    background-image: url('../img/cover_back.png');
     background-size: cover;
     background-position: left -110px center;
   }
@@ -231,7 +231,7 @@ a.custom-card:hover {
 
 @media (max-width: 1920px) {
   .jumbotron {
-    background-image: url('../img/cover_back.png'); 
+    background-image: url('../img/cover_back.png');
     background-size: cover;
     background-position: left -110px center;
   }
@@ -268,7 +268,7 @@ a.custom-card:hover {
   margin: 0 auto;
 }
 
-#toggleButtonText{
+#toggleButtonText {
   padding-left: 5px;
   font-size: 14px;
 }
@@ -280,7 +280,7 @@ a.custom-card:hover {
 }
 
 body.modo-noche #imagenLogin {
-  color: #fff; 
+  color: #fff;
 }
 
 body.modo-noche .form-control::placeholder {
@@ -288,7 +288,7 @@ body.modo-noche .form-control::placeholder {
 }
 
 body.modo-noche .form-check-input[type="checkbox"] {
-  background-color: #8b8b8b; 
+  background-color: #8b8b8b;
 }
 
 body.modo-noche #loginContainer {
@@ -299,15 +299,15 @@ body.modo-noche #loginContainer {
 
 body.modo-noche .btn-dark {
   background-color: #000;
-  border-color: #000; 
-  color: #fff; 
+  border-color: #000;
+  color: #fff;
 }
 
 body.modo-noche .form-check-label {
   color: #fff;
 }
 
-body.modo-noche #switchLoginRegistro:checked + .form-check-label::before {
+body.modo-noche #switchLoginRegistro:checked+.form-check-label::before {
   background-color: initial;
 }
 
@@ -328,7 +328,7 @@ body.modo-noche #imagenLogin {
 
 body.modo-noche .jumbotron {
   background-image: url('../img/cover_back_black.png');
-  color: white; 
+  color: white;
 }
 
 body.modo-noche .album {
@@ -349,7 +349,7 @@ body .album {
   color: #fff;
 }
 
-.modo-noche .card{
+.modo-noche .card {
   background-color: #212529;
   color: #ffffff;
 }
@@ -357,7 +357,7 @@ body .album {
 
 body,
 body.modo-noche {
-  background-color: #fff; 
+  background-color: #fff;
   color: #3B3D3D;
 }
 
@@ -369,29 +369,29 @@ body.modo-noche {
 input,
 select,
 textarea {
-  background-color: #fff; 
+  background-color: #fff;
   color: #3B3D3D;
-  border: 1px solid #ccc; 
+  border: 1px solid #ccc;
 }
 
 body.modo-noche input,
 body.modo-noche select,
 body.modo-noche textarea {
   background-color: #2C2E30;
-  color: #fff; 
-  border: 1px solid #555; 
+  color: #fff;
+  border: 1px solid #555;
 }
 
 #file-upload {
-  background-color: #fff; 
-  color: #3B3D3D; 
-  border: 1px dashed #ccc; 
+  background-color: #fff;
+  color: #3B3D3D;
+  border: 1px dashed #ccc;
   padding: 10px;
   text-align: center;
 }
 
 body.modo-noche #file-upload {
-  background-color: #2C2E30; 
+  background-color: #2C2E30;
   color: #fff;
   border: 1px dashed #555;
 }
@@ -405,10 +405,11 @@ body.modo-noche #file-upload {
 body.modo-noche .list-group-item {
   background-color: #2C2E30;
   color: #fff;
-  border: 1px solid #555; 
+  border: 1px solid #555;
 }
 
-table#comentariosCargados td, table#comentariosCargados tr {
+table#comentariosCargados td,
+table#comentariosCargados tr {
   color: #3B3D3D;
 }
 
@@ -416,48 +417,48 @@ body.modo-noche table#comentariosCargados td {
   color: #fff;
 }
 
-body.modo-noche th{
+body.modo-noche th {
   color: #fff;
 }
 
 .btn.btn-light {
-  background-color: #fff; 
-  color: #000; 
-  border-color: #CED4DA; 
+  background-color: #fff;
+  color: #000;
+  border-color: #CED4DA;
 }
 
-.btn.btn-light + label {
-  background-color: #fff; 
-  color: #000; 
-  border-color: #CED4DA; 
+.btn.btn-light+label {
+  background-color: #fff;
+  color: #000;
+  border-color: #CED4DA;
 }
 
 body.modo-noche .btn.btn-light {
-  background-color: #2C2E30; 
+  background-color: #2C2E30;
   color: #fff;
   border-color: #555;
 }
 
-body.modo-noche .btn.btn-light + label {
+body.modo-noche .btn.btn-light+label {
   background-color: #2C2E30;
   color: #fff;
-  border-color: #555; 
+  border-color: #555;
 }
 
 .btn.btn-light[for="sortByCount"] {
   background-color: #fff;
-  color: #000; 
-  border-color: #2C2E30; 
+  color: #000;
+  border-color: #2C2E30;
   border-width: 11x;
   border-style: solid;
 }
 
 body.modo-noche .btn.btn-light[for="sortByCount"] {
-  background-color: #2C2E30; 
-  color: #fff; 
+  background-color: #2C2E30;
+  color: #fff;
 }
 
-body.modo-noche footer{
+body.modo-noche footer {
   background-color: #212529;
 }
 
@@ -487,7 +488,7 @@ body.modo-noche #contidionsModal .text-secondary {
 
 body.modo-noche #contidionsModal .modal-footer {
   background-color: #3C4043;
-  border-top: 1px solid #555; 
+  border-top: 1px solid #555;
 }
 
 body.modo-noche #contidionsModal .btn-primary {
@@ -519,22 +520,22 @@ td {
   border-bottom: 1px solid rgb(0, 0, 0);
 }
 
-.modo-noche td{
+.modo-noche td {
   border-bottom: 1px solid rgb(255, 255, 255);
 }
 
-tr{
+tr {
   border-bottom: 1px solid rgb(0, 0, 0);
 }
 
-.modo-noche tr{
+.modo-noche tr {
   border-bottom: 1px solid rgb(255, 255, 255);
 }
 
 .custom-btn-color {
   background-color: #2C2E30;
-  color: #fff; 
-  transition: color 0.3s; 
+  color: #fff;
+  transition: color 0.3s;
 }
 
 .custom-btn-color:hover {
@@ -543,13 +544,28 @@ tr{
 
 .custom-thumbnail {
   padding: 5px;
-  border: 1px solid #ccc; 
-  border-radius: 4px; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.centrar{
+.centrar {
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 2%;
+}
+
+.image-container {
+  width: 25%;
+}
+
+@media (max-width: 576px) {
+  .image-container {
+    max-width: 100%;
+    min-width: 100px;
+  }
+}
+
+.modo-noche td {
+  color: white;
 }

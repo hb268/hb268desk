@@ -15,11 +15,11 @@ addEventListener("DOMContentLoaded", () => {
                 newRow.setAttribute("data-id", articulo.id);
 
                 newRow.innerHTML = `
-        <td class="h-25" style="width: 100px"><img src="${articulo.image}" alt="${articulo.name}" class="img-thumbnail"></td>
-        <td>${articulo.name}</td>
-        <td>${articulo.currency} ${articulo.unitCost}</td>
-        <td><input type="number" min="1" max="9999" value="1" id="cantidad_${articulo.id}" class="form-control"></td>
-        <td id="total_${articulo.id}"><b>${articulo.currency} ${articulo.unitCost}</b></td>
+                <td class="image-container"><img src="${articulo.image}" alt="${articulo.name}" class="img-thumbnail"></td>
+                <td>${articulo.name}</td>
+                <td>${articulo.currency} ${articulo.unitCost}</td>
+                <td><input type="number" min="1" max="9999" value="1" id="cantidad_${articulo.id}" class="form-control"></td>
+                <td id="total_${articulo.id}"><b>${articulo.currency} ${articulo.unitCost}</b></td>
         `;
 
                 tablaProductosBody.appendChild(newRow);
@@ -45,7 +45,7 @@ function AgregarACarrito() {
 
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
-            <td class="col-lg-2"><img src="${element.images[0]}" alt="" class="img-thumbnail img-fluid"></td>
+            <td class="image-container"><img src="${element.images[0]}" alt="" class="img-thumbnail img-fluid"></td>
             <td>${element.name}</td>
             <td>${element.currency} ${element.cost}</td>
             <td><input type="number" min="1" max="100" value="1" id="cantidad_${element.id}" class="form-control"></td>
