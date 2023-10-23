@@ -569,3 +569,7 @@ tr {
 .modo-noche td {
   color: white;
 }
+
+.bg-gris {
+  background-color: hwb(0 78% 21% / 0.986);
+}

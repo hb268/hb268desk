@@ -75,3 +75,54 @@ function AgregarACarrito() {
 }
 
 AgregarACarrito();
+
+
+let Tarjeta_credito = document.getElementById("credito");
+let Transfer = document.getElementById("transferencia");
+let numerodetarjeta = document.getElementById("numerodetarjeta");
+let codseguridad = document.getElementById("codseguridad");
+let vencimiento = document.getElementById("vencimiento");
+let numcuenta = document.getElementById("numcuenta");
+let metodo_seleccionado = document.getElementById("metodo_seleccionado")
+
+
+
+Tarjeta_credito.addEventListener("click", ()=>{
+    metodo_seleccionado.innerHTML = "Tarjeta de Crédito"
+    
+    numcuenta.disabled = true;
+    numcuenta.classList.add("bg-gris");
+    numcuenta.value = "";
+
+    numerodetarjeta.required = true;
+    numerodetarjeta.disabled = false;
+    numerodetarjeta.classList.remove("bg-gris");
+    
+    codseguridad.required = true;
+    codseguridad.disabled = false;
+    codseguridad.classList.remove("bg-gris");
+    
+    vencimiento.required = true;
+    vencimiento.disabled = false;
+    vencimiento.classList.remove("bg-gris");
+});
+
+Transfer.addEventListener("click", ()=>{
+    metodo_seleccionado.innerHTML = "Transferencia Bancaria";
+    
+    numcuenta.disabled = false;
+    numcuenta.classList.remove("bg-gris");
+    
+    numerodetarjeta.disabled = true;
+    numerodetarjeta.classList.add("bg-gris");
+    numerodetarjeta.value = "";
+    
+    codseguridad.disabled = true;
+    codseguridad.classList.add("bg-gris");
+    codseguridad.value = "";
+    
+    vencimiento.disabled = true;
+    vencimiento.classList.add("bg-gris");
+    vencimiento.value = "";
+    
+})
