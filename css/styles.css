@@ -573,3 +573,16 @@ tr {
 .bg-gris {
   background-color: hwb(0 78% 21% / 0.986);
 }
+
+body.modo-noche #formadepago .modal-content {
+  background-color: #2C2E30;
+  color: #fff;
+}
+
+body.modo-noche #formadepago label {
+  color: #fff;
+}
+
+body.modo-noche #formadepago hr {
+  border-color: #fff;
+}
