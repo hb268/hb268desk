@@ -102,6 +102,7 @@ function recalcularCostos(descuento) {
     if (descuento > 0) {
         subtotal -= descuento;
     }
+    let moneda = ""
     carrito.forEach((element) => {
         const cantidadInput = document.getElementById(`cantidad_${element.id}`);
         const precioProducto = parseFloat(element.cost);
@@ -109,7 +110,9 @@ function recalcularCostos(descuento) {
         let subtotalProducto = precioProducto * cantidad;
         if (element.currency === "UYU") {
             subtotalProducto = subtotalProducto / tasaDeCambio;
+            element.currency = "USD"
         }
+        moneda = element.currency;
         subtotal += subtotalProducto;
     });
     if (!precargadoEliminado) {
@@ -123,6 +126,7 @@ function recalcularCostos(descuento) {
                     const cantidadInput = document.getElementById(`cantidad_${articulo.id}`);
                     const cantidad = parseInt(cantidadInput.value);
                     const subtotalProducto = unitCost * cantidad;
+                    moneda = articulo.currency;
                     subtotal += subtotalProducto;
                 });
 
@@ -140,9 +144,9 @@ function recalcularCostos(descuento) {
                     }
                 });
 
-                subtotalValue.textContent = subtotal.toFixed(2);
-                envioValue.textContent = costoEnvio.toFixed(2);
-                totalValue.textContent = (subtotal + costoEnvio).toFixed(2);
+                subtotalValue.textContent = moneda + " " + subtotal.toFixed(2);
+                envioValue.textContent = moneda + " " + costoEnvio.toFixed(2);
+                totalValue.textContent = moneda + " " + (subtotal + costoEnvio).toFixed(2);
             });
     }
     let costoEnvio = 0;
@@ -159,9 +163,9 @@ function recalcularCostos(descuento) {
         }
     });
 
-    subtotalValue.textContent = subtotal.toFixed(2);
-    envioValue.textContent = costoEnvio.toFixed(2);
-    totalValue.textContent = (subtotal + costoEnvio).toFixed(2);
+    subtotalValue.textContent = moneda + " " + subtotal.toFixed(2);
+    envioValue.textContent = moneda + " " + costoEnvio.toFixed(2);
+    totalValue.textContent = moneda + " " + (subtotal + costoEnvio).toFixed(2);
 }
 
 radioButtons.forEach((radio) => {
@@ -175,8 +179,6 @@ let codseguridad = document.getElementById("codseguridad");
 let vencimiento = document.getElementById("vencimiento");
 let numcuenta = document.getElementById("numcuenta");
 let metodo_seleccionado = document.getElementById("metodo_seleccionado")
-
-
 
 Tarjeta_credito.addEventListener("click", () => {
     metodo_seleccionado.innerHTML = "Tarjeta de Crédito"
@@ -217,3 +219,119 @@ Transfer.addEventListener("click", () => {
     vencimiento.value = "";
 
 })
+
+const mensajeError = document.getElementById('formapagoError');
+
+
+function validarFormaDePago() {
+    let seleccionado = false;
+
+    [Tarjeta_credito, Transfer].forEach((formaDePago) => {
+        if (formaDePago.checked) {
+            seleccionado = true;
+        }
+    });
+
+    if (!seleccionado) {
+        mensajeError.style.display = 'block';
+        return false;
+    }
+
+    if (Tarjeta_credito.checked) {
+        if (numerodetarjeta.value.trim() === '' ||
+            codseguridad.value.trim() === '' ||
+            vencimiento.value.trim() === '') {
+            mensajeError.style.display = 'block';
+            numerodetarjeta.classList.add('is-invalid');
+            codseguridad.classList.add('is-invalid');
+            vencimiento.classList.add('is-invalid');
+            return false;
+        }
+    } else if (Transfer.checked) {
+        if (numcuenta.value.trim() === '') {
+            mensajeError.style.display = 'block';
+            numcuenta.classList.add('is-invalid');
+            return false;
+        }
+    }
+
+    mensajeError.style.display = 'none';
+    numerodetarjeta.classList.remove('is-invalid');
+    codseguridad.classList.remove('is-invalid');
+    vencimiento.classList.remove('is-invalid');
+    numcuenta.classList.remove('is-invalid');
+    return true;
+}
+
+btnCompra.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    const campos = [calle, numero, esquina];
+    let camposValidos = true;
+
+    for (const campo of campos) {
+        if (campo.value.trim() === '') {
+            campo.classList.add('is-invalid');
+            camposValidos = false;
+        } else {
+            campo.classList.remove('is-invalid');
+            campo.classList.add('is-valid');
+        }
+    }
+
+    var tipoEnvio = document.querySelector('input[name="inlineRadioOptions"]:checked');
+
+    if (!tipoEnvio) {
+        document.getElementById("envioError").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("envioError").style.display = "none";
+    }
+
+    const cantidades = document.querySelectorAll('input[id^="cantidad_"]');
+    let cantidadesValidas = true;
+
+    cantidades.forEach(cantidadInput => {
+        const cantidad = parseInt(cantidadInput.value);
+        if (isNaN(cantidad) || cantidad <= 0) {
+            cantidadesValidas = false;
+            cantidadInput.classList.add('is-invalid');
+        } else {
+            cantidadInput.classList.remove('is-invalid');
+            cantidadInput.classList.add('is-valid');
+        }
+    });
+
+
+    if (!validarFormaDePago()) {
+        return false;
+    }
+
+    if (!camposValidos || !cantidadesValidas) {
+        return false;
+    }
+
+    document.getElementById('alertaCompraExitosa').style.display = 'block';
+    setTimeout(function () {
+        document.getElementById('alertaCompraExitosa').style.display = 'none';
+        localStorage.removeItem('cart');
+        window.location.href = 'cart.html';
+    }, 2000);
+
+    for (const campo of campos) {
+        campo.value = '';
+        campo.classList.remove('is-valid');
+    }
+
+    const radios = document.querySelectorAll('input[name="inlineRadioOptions"]');
+    radios.forEach(radio => {
+        radio.checked = false;
+    });
+
+
+    cantidades.forEach(cantidadInput => {
+        cantidadInput.value = '1';
+        cantidadInput.classList.remove('is-valid');
+    });
+
+});

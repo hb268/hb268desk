@@ -586,3 +586,17 @@ body.modo-noche #formadepago label {
 body.modo-noche #formadepago hr {
   border-color: #fff;
 }
+
+.container.product p {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.is-valid {
+  border-color: #28a745; 
+}
+
+
+.is-invalid {
+  border-color: #dc3545;
+}

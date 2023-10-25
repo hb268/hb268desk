@@ -93,18 +93,26 @@
       <br>
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Estándar"
-          checked>
+          required>
         <label class="form-check-label" for="inlineRadio3">Estándar 12 a 15 días(5%)</label>
       </div>
+      <div id="envioError" class="invalid-feedback">Debe seleccionar un tipo de envío.</div>
+    </div>
+    <div id="alertaCompraExitosa" class="alert alert-success" role="alert" style="display:none;">
+      ¡Has comprado con éxito!
+      <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div>
       <form class="form-control">
         <label for="calle" class="form-label">Calle</label>
         <input size="30" type="text" name="" id="calle" class="form-control">
+        <div id="calleError" class="invalid-feedback">Ingrese una calle.</div>
         <label for="numero" class="form-label">Número</label>
         <input size="30" type="text" name="" id="numero" class="form-control">
+        <div id="numeroError" class="invalid-feedback">Ingrese un número.</div>
         <label for="esquina" class="form-label">Esquina</label>
         <input size="30" type="text" name="" id="esquina" class="form-control">
+        <div id="esquinaError" class="invalid-feedback">Ingrese una esquina.</div>
       </form>
     </div>
     <div class="container product list-group-item mt-3">
@@ -137,10 +145,15 @@
         </div>
       </div>
     </div>
-    <div class="container m-auto mt-2">
+    <hr>
+    <div class="container m-auto">
       <h4>Forma de Pago</h4>
       <p><span id="metodo_seleccionado">No ha Seleccionado</span> <a type="button" class="" data-bs-toggle="modal"
           data-bs-target="#formadepago">Seleccionar</a></p>
+      <div id="formapagoError" class="invalid-feedback">Debe seleccionar una forma de pago.</div>
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto mt-5">
+      <button class="btn btn-primary" type="button" id="btnCompra">Finalizar compra</button>
     </div>
     <!-- Modal -->
     <div class="modal fade " id="formadepago" tabindex="-1" aria-hidden="true">
@@ -152,7 +165,7 @@
           </div>
           <div class="modal-body">
             <div class="container">
-              <input type="radio" id="credito" name="met" value="">
+              <input type="radio" id="credito" name="btnradio" value="" required>
               <label for="credito">Tarjeta de Crédito</label><br>
               <hr>
             </div>
@@ -164,36 +177,36 @@
                   <label for="vencimiento">Vencimiento (MM/AA)</label><br><br>
                 </div>
                 <div class="col">
-                  <input class="" type="text" name="numerodetarjeta" id="numerodetarjeta" disabled><br><br>
-                  <input type="text" name="codseguridad" id="codseguridad" disabled><br><br>
-                  <input type="text" name="vencimiento" id="vencimiento" disabled><br><br>
+                  <input class="" type="text" name="numerodetarjeta" id="numerodetarjeta" disabled required><br><br>
+                  <input type="text" name="codseguridad" id="codseguridad" disabled required><br><br>
+                  <input type="text" name="vencimiento" id="vencimiento" disabled required><br><br>
                 </div>
               </div>
             </div>
-            <input type="radio" id="transferencia" name="met" value="">
+            <input type="radio" id="transferencia" name="btnradio" value="" required>
             <label for="transferencia">Transferencia Bancaria</label><br>
             <hr>
             <div class="container-fluid md-3">
               <div class="row">
                 <div class="col"><label for="numcuenta">Numero de Cuenta</label><br></div>
-                <div class="col"><input type="text" name="numcuenta" id="numcuenta" disabled><br></div>
+                <div class="col"><input type="text" name="numcuenta" id="numcuenta" disabled required><br></div>
               </div><br>
               <div>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="spinner-wrapper">
-      <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div id="spinner-wrapper">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </div>
   </div>
