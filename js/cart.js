@@ -1,8 +1,8 @@
 var userId = 25801;
 const apiUrl = `https://japceibal.github.io/emercado-api/user_cart/${userId}.json`;
-
+const tasaDeCambio = 39;
 const tablaProductosBody = document.getElementById("tablaProductosBody");
-
+let precargadoEliminado = false;
 document.addEventListener("DOMContentLoaded", () => {
     fetch(apiUrl)
         .then(response => response.json())
@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const cantidadInput = document.getElementById(`cantidad_${articulo.id}`);
                     const cantidad = parseInt(cantidadInput.value);
                     recalcularCostos(articulo.unitCost * cantidad);
+                    precargadoEliminado = true;
                 });
 
                 document.getElementById(`cantidad_${articulo.id}`).addEventListener('input', (event) => {
@@ -72,12 +73,14 @@ function AgregarACarrito() {
         eliminarButton.addEventListener('click', () => {
             const cantidadInput = document.getElementById(`cantidad_${element.id}`);
             const cantidad = parseInt(cantidadInput.value);
-            const subtotal = element.cost * cantidad;
-            carrito.splice(carrito.findIndex(item => item.id === element.id), 1);
-            localStorage.setItem('cart', JSON.stringify(carrito));
+            const itemIndex = carrito.findIndex(item => item.id === element.id);
+            if (itemIndex !== -1) {
+                carrito.splice(itemIndex, 1);
+                localStorage.setItem('cart', JSON.stringify(carrito));
+            }
             const rowToDelete = document.getElementById(`total_${element.id}`).closest('tr');
             rowToDelete.style.display = 'none';
-            recalcularCostos(subtotal);
+            recalcularCostos();
         });
     });
 }
@@ -88,13 +91,13 @@ document.addEventListener("DOMContentLoaded", () => {
     recalcularCostos();
 });
 
-const subtotalValue = document.getElementById("importeSubtotal");
-const envioValue = document.getElementById("importeEnvio");
-const totalValue = document.getElementById("importeTotal");
 const radioButtons = document.querySelectorAll('input[name="inlineRadioOptions"]');
-const carrito = JSON.parse(localStorage.getItem('cart')) || [];
 
 function recalcularCostos(descuento) {
+    const subtotalValue = document.getElementById("importeSubtotal");
+    const envioValue = document.getElementById("importeEnvio");
+    const totalValue = document.getElementById("importeTotal");
+    const carrito = JSON.parse(localStorage.getItem('cart')) || [];
     let subtotal = 0;
     if (descuento > 0) {
         subtotal -= descuento;
@@ -103,52 +106,67 @@ function recalcularCostos(descuento) {
         const cantidadInput = document.getElementById(`cantidad_${element.id}`);
         const precioProducto = parseFloat(element.cost);
         const cantidad = parseInt(cantidadInput.value);
-        const subtotalProducto = precioProducto * cantidad;
-
+        let subtotalProducto = precioProducto * cantidad;
+        if (element.currency === "UYU") {
+            subtotalProducto = subtotalProducto / tasaDeCambio;
+        }
         subtotal += subtotalProducto;
     });
-    const apiUrl = `https://japceibal.github.io/emercado-api/user_cart/${userId}.json`;
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            const articles = data.articles;
-            articles.forEach(articulo => {
-                const unitCost = parseFloat(articulo.unitCost);
-                const cantidadInput = document.getElementById(`cantidad_${articulo.id}`);
-                const cantidad = parseInt(cantidadInput.value);
-                const subtotalProducto = unitCost * cantidad;
-                subtotal += subtotalProducto;
-            });
+    if (!precargadoEliminado) {
+        const apiUrl = `https://japceibal.github.io/emercado-api/user_cart/${userId}.json`;
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const articles = data.articles;
+                articles.forEach(articulo => {
+                    const unitCost = parseFloat(articulo.unitCost);
+                    const cantidadInput = document.getElementById(`cantidad_${articulo.id}`);
+                    const cantidad = parseInt(cantidadInput.value);
+                    const subtotalProducto = unitCost * cantidad;
+                    subtotal += subtotalProducto;
+                });
 
-            let costoEnvio = 0;
-            radioButtons.forEach((radio) => {
-                if (radio.checked) {
-                    const selectedValue = radio.value;
-                    if (selectedValue === "premium") {
-                        costoEnvio = subtotal * 0.15;
-                    } else if (selectedValue === "express") {
-                        costoEnvio = subtotal * 0.07;
-                    } else if (selectedValue === "Estándar") {
-                        costoEnvio = subtotal * 0.05;
+                let costoEnvio = 0;
+                radioButtons.forEach((radio) => {
+                    if (radio.checked) {
+                        const selectedValue = radio.value;
+                        if (selectedValue === "premium") {
+                            costoEnvio = subtotal * 0.15;
+                        } else if (selectedValue === "express") {
+                            costoEnvio = subtotal * 0.07;
+                        } else if (selectedValue === "Estándar") {
+                            costoEnvio = subtotal * 0.05;
+                        }
                     }
-                }
-            });
+                });
 
-            subtotalValue.textContent = subtotal.toFixed(2);
-            envioValue.textContent = costoEnvio.toFixed(2);
-            totalValue.textContent = (subtotal + costoEnvio).toFixed(2);
-        });
+                subtotalValue.textContent = subtotal.toFixed(2);
+                envioValue.textContent = costoEnvio.toFixed(2);
+                totalValue.textContent = (subtotal + costoEnvio).toFixed(2);
+            });
+    }
+    let costoEnvio = 0;
+    radioButtons.forEach((radio) => {
+        if (radio.checked) {
+            const selectedValue = radio.value;
+            if (selectedValue === "premium") {
+                costoEnvio = subtotal * 0.15;
+            } else if (selectedValue === "express") {
+                costoEnvio = subtotal * 0.07;
+            } else if (selectedValue === "Estándar") {
+                costoEnvio = subtotal * 0.05;
+            }
+        }
+    });
+
+    subtotalValue.textContent = subtotal.toFixed(2);
+    envioValue.textContent = costoEnvio.toFixed(2);
+    totalValue.textContent = (subtotal + costoEnvio).toFixed(2);
 }
 
 radioButtons.forEach((radio) => {
     radio.addEventListener('change', recalcularCostos);
 });
-
-carrito.forEach((element) => {
-    const cantidadInput = document.getElementById(`cantidad_${element.id}`);
-    cantidadInput.addEventListener('input', recalcularCostos);
-});
-
 
 let Tarjeta_credito = document.getElementById("credito");
 let Transfer = document.getElementById("transferencia");
@@ -160,9 +178,9 @@ let metodo_seleccionado = document.getElementById("metodo_seleccionado")
 
 
 
-Tarjeta_credito.addEventListener("click", ()=>{
+Tarjeta_credito.addEventListener("click", () => {
     metodo_seleccionado.innerHTML = "Tarjeta de Crédito"
-    
+
     numcuenta.disabled = true;
     numcuenta.classList.add("bg-gris");
     numcuenta.value = "";
@@ -170,32 +188,32 @@ Tarjeta_credito.addEventListener("click", ()=>{
     numerodetarjeta.required = true;
     numerodetarjeta.disabled = false;
     numerodetarjeta.classList.remove("bg-gris");
-    
+
     codseguridad.required = true;
     codseguridad.disabled = false;
     codseguridad.classList.remove("bg-gris");
-    
+
     vencimiento.required = true;
     vencimiento.disabled = false;
     vencimiento.classList.remove("bg-gris");
 });
 
-Transfer.addEventListener("click", ()=>{
+Transfer.addEventListener("click", () => {
     metodo_seleccionado.innerHTML = "Transferencia Bancaria";
-    
+
     numcuenta.disabled = false;
     numcuenta.classList.remove("bg-gris");
-    
+
     numerodetarjeta.disabled = true;
     numerodetarjeta.classList.add("bg-gris");
     numerodetarjeta.value = "";
-    
+
     codseguridad.disabled = true;
     codseguridad.classList.add("bg-gris");
     codseguridad.value = "";
-    
+
     vencimiento.disabled = true;
     vencimiento.classList.add("bg-gris");
     vencimiento.value = "";
-    
+
 })
