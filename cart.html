@@ -92,71 +92,121 @@
       </div>
       <br>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Estándar"
-          checked>
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Estándar">
         <label class="form-check-label" for="inlineRadio3">Estándar 12 a 15 días(5%)</label>
       </div>
     </div>
-    <form class="form-control">
-      <label for="calle" class="form-label">Calle</label>
-      <input size="30" type="text" name="" id="calle" class="form-control">
-      <label for="numero" class="form-label">Número</label>
-      <input size="30" type="text" name="" id="numero" class="form-control">
-      <label for="esquina" class="form-label">Esquina</label>
-      <input size="30" type="text" name="" id="esquina" class="form-control">
-    </form>
-  </div>
-  <div class="container product list-group-item mt-3">
-    <div class="row">
-      <div class="col">
-        <div class="d-flex w-100 justify-content-between" id="subtotal">
-          <h4 class="mb-1">Subtotal</h4>
-          <small class="text-muted" id="importeSubtotal"></small>
-        </div>
-        <p class="mb-1">Costo unitario del producto</p>
-      </div>
+    <div>
+      <form class="form-control">
+        <label for="calle" class="form-label">Calle</label>
+        <input size="30" type="text" name="" id="calle" class="form-control">
+        <label for="numero" class="form-label">Número</label>
+        <input size="30" type="text" name="" id="numero" class="form-control">
+        <label for="esquina" class="form-label">Esquina</label>
+        <input size="30" type="text" name="" id="esquina" class="form-control">
+      </form>
     </div>
-    <div class="line-divider"></div>
-    <div class="row">
-      <div class="col">
-        <div class="d-flex w-100 justify-content-between" id="envio">
-          <h4 class="mb-1">Envío</h4>
-          <small class="text-muted" id="importeEnvio"></small>
-        </div>
-        <p class="mb-1">Forma de envío</p>
-      </div>
-    </div>
-    <div class="line-divider"></div>
-    <div class="row">
-      <div class="col">
-        <div class="d-flex w-100 justify-content-between" id="total">
-          <h4 class="mb-1">Total</h4>
-          <small class="text-muted" id="importeTotal"></small>
+    <div class="container product list-group-item mt-3">
+      <div class="row">
+        <div class="col">
+          <div class="d-flex w-100 justify-content-between" id="subtotal">
+            <h4 class="mb-1">Subtotal</h4>
+            <small class="text-muted" id="importeSubtotal"></small>
+          </div>
+          <p class="mb-1">Costo unitario del producto</p>
         </div>
       </div>
+      <div class="line-divider"></div>
+      <div class="row">
+        <div class="col">
+          <div class="d-flex w-100 justify-content-between" id="envio">
+            <h4 class="mb-1">Envío</h4>
+            <small class="text-muted" id="importeEnvio"></small>
+          </div>
+          <p class="mb-1">Forma de envío</p>
+        </div>
+      </div>
+      <div class="line-divider"></div>
+      <div class="row">
+        <div class="col">
+          <div class="d-flex w-100 justify-content-between" id="total">
+            <h4 class="mb-1">Total</h4>
+            <small class="text-muted" id="importeTotal"></small>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <footer class="text-muted mt-5">
-    <div class="container footer">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
-      </p>
+    <div class="container m-auto mt-2">
+      <h4>Forma de Pago</h4>
+      <p><span id="metodo_seleccionado">No ha Seleccionado</span> <a type="button" class="" data-bs-toggle="modal"
+          data-bs-target="#formadepago">Seleccionar</a></p>
     </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <!-- Modal -->
+    <div class="modal fade " id="formadepago" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Forma de Pago</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <input type="radio" id="credito" name="met" value="">
+              <label for="credito">Tarjeta de Crédito</label><br>
+              <hr>
+            </div>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col">
+                  <label for="numerodetarjeta">Número de tarjeta</label><br><br>
+                  <label for="codseguridad">Código de seg.</label><br><br>
+                  <label for="vencimiento">Vencimiento (MM/AA)</label><br><br>
+                </div>
+                <div class="col">
+                  <input class="" type="text" name="numerodetarjeta" id="numerodetarjeta" disabled><br><br>
+                  <input type="text" name="codseguridad" id="codseguridad" disabled><br><br>
+                  <input type="text" name="vencimiento" id="vencimiento" disabled><br><br>
+                </div>
+              </div>
+            </div>
+            <input type="radio" id="transferencia" name="met" value="">
+            <label for="transferencia">Transferencia Bancaria</label><br>
+            <hr>
+            <div class="container-fluid md-3">
+              <div class="row">
+                <div class="col"><label for="numcuenta">Numero de Cuenta</label><br></div>
+                <div class="col"><input type="text" name="numcuenta" id="numcuenta" disabled><br></div>
+              </div><br>
+              <div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <footer class="text-muted mt-5">
+      <div class="container footer">
+        <p class="float-end">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+        </p>
+      </div>
+    </footer>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/cart.js"></script>
 </body>
 
 </html>
