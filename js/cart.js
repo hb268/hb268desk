@@ -48,8 +48,10 @@ function AgregarACarrito() {
     const carrito = JSON.parse(localStorage.getItem('cart')) || [];
     const tablaProductosBody = document.getElementById("tablaProductosBody");
     tablaProductosBody.innerHTML = '';
-
+  
     carrito.forEach(element => {
+      const nombreLogueado = localStorage.getItem('nombreLogueado');
+      if (element.nombreCliente === nombreLogueado) {
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
             <td class="image-container"><img src="${element.images[0]}" alt="" class="img-thumbnail img-fluid"></td>
@@ -60,30 +62,33 @@ function AgregarACarrito() {
             <td><button class="btn btn-danger" id="eliminar_${element.id}">Eliminar</button></td>
         `;
         tablaProductosBody.appendChild(newRow);
-
+  
         const cantidadInput = document.getElementById(`cantidad_${element.id}`);
         const eliminarButton = document.getElementById(`eliminar_${element.id}`);
-
+  
         cantidadInput.addEventListener('input', (event) => {
             const cantidad = event.target.value;
             const subtotal = element.cost * cantidad;
             document.getElementById(`total_${element.id}`).innerHTML = `<p>${element.currency} ${subtotal}</p>`;
         });
-
+  
         eliminarButton.addEventListener('click', () => {
             const cantidadInput = document.getElementById(`cantidad_${element.id}`);
             const cantidad = parseInt(cantidadInput.value);
-            const itemIndex = carrito.findIndex(item => item.id === element.id);
+            const itemIndex = carrito.findIndex(item => item.id === element.id && item.nombreCliente === nombreLogueado);
+        
             if (itemIndex !== -1) {
                 carrito.splice(itemIndex, 1);
                 localStorage.setItem('cart', JSON.stringify(carrito));
             }
+        
             const rowToDelete = document.getElementById(`total_${element.id}`).closest('tr');
             rowToDelete.style.display = 'none';
             recalcularCostos();
         });
+      }
     });
-}
+  }
 
 AgregarACarrito();
 
@@ -99,21 +104,28 @@ function recalcularCostos(descuento) {
     const totalValue = document.getElementById("importeTotal");
     const carrito = JSON.parse(localStorage.getItem('cart')) || [];
     let subtotal = 0;
+    let moneda = "";
+    const nombreLogueado = localStorage.getItem('nombreLogueado'); // Obtener el nombre de usuario logueado del almacenamiento local
+
     if (descuento > 0) {
         subtotal -= descuento;
     }
-    let moneda = ""
+
     carrito.forEach((element) => {
-        const cantidadInput = document.getElementById(`cantidad_${element.id}`);
-        const precioProducto = parseFloat(element.cost);
-        const cantidad = parseInt(cantidadInput.value);
-        let subtotalProducto = precioProducto * cantidad;
-        if (element.currency === "UYU") {
-            subtotalProducto = subtotalProducto / tasaDeCambio;
-            element.currency = "USD"
+        if (element.nombreCliente === nombreLogueado) {
+            const cantidadInput = document.getElementById(`cantidad_${element.id}`);
+            const precioProducto = parseFloat(element.cost);
+            const cantidad = parseInt(cantidadInput.value);
+            let subtotalProducto = precioProducto * cantidad;
+
+            if (element.currency === "UYU") {
+                subtotalProducto = subtotalProducto / tasaDeCambio;
+                element.currency = "USD";
+            }
+
+            moneda = element.currency;
+            subtotal += subtotalProducto;
         }
-        moneda = element.currency;
-        subtotal += subtotalProducto;
     });
     if (!precargadoEliminado) {
         const apiUrl = `https://japceibal.github.io/emercado-api/user_cart/${userId}.json`;

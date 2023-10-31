@@ -46,8 +46,8 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="nombreLoginDropdown" role="button" data-bs-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="nombreLoginDropdown" role="button"
+              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span id="nombreLogin">Usuario</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="nombreLoginDropdown">
@@ -72,17 +72,59 @@
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+      <form class="row">
+        <div class="d-flex justify-content-between align-items-center">
+          <h1>Perfil</h1>
+          <div id="contenedorImagen" class="image-container"></div>
+        </div>
+        <hr>
+        <div class="form-group col-md-6 col-12">
+          <label for="first-name">Primer nombre*</label>
+          <input type="text" class="form-control" id="first-name" required>
+          <div id="nombreError" class="invalid-feedback">Debe ingresar un nombre.</div>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <label for="middle-name">Segundo nombre</label>
+          <input type="text" class="form-control" id="middle-name">
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <label for="last-name">Primer apellido*</label>
+          <input type="text" class="form-control" id="last-name" required>
+          <div id="apellidoError" class="invalid-feedback">Debe ingresar un apellido.</div>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <label for="second-last-name">Segundo apellido</label>
+          <input type="text" class="form-control" id="second-last-name">
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <label for="email">E-mail*</label>
+          <input type="email" class="form-control" id="email" required>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <label for="phone-number">Teléfono de contacto*</label>
+          <input type="tel" class="form-control" id="phone-number" required>
+          <div id="telefonoError" class="invalid-feedback">Debe ingresar un telefono.</div>
+        </div>
+        <div class="form-group col-md-6 col-12">
+        </div>
+        <div class="form-group col-md-6 col-12 mt-2">
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Imagen de perfil</label>
+            <input class="form-control" type="file" id="entradaArchivo" accept="image/*" onchange="subirImagen()" >
+          </div>
+        </div>
+      </form>
+      <hr>
+      <button class="btn btn-primary mt-2" id="boton-guardar-cambios">Guardar cambios</button>
     </div>
   </main>
-  <footer class="text-muted mt-5" >
+  <footer class="text-muted mt-5">
     <div class="container footer">
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+      </p>
     </div>
   </footer>
   <script src="js/bootstrap.bundle.min.js"></script>

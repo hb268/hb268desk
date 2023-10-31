@@ -600,3 +600,22 @@ body.modo-noche #formadepago hr {
 .is-invalid {
   border-color: #dc3545;
 }
+
+.image-container {
+  display: flex;
+  align-items: center;
+}
+
+.image-container img {
+  border: 2px solid #ccc;
+  padding: 10px;
+  max-width: 200px;
+  max-height: 200px;
+  margin: 10px;
+}
+
+@media (max-width: 768px) {
+  #contenedorImagen {
+    margin-right: 100px;
+  }
+}
