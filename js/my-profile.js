@@ -1,3 +1,4 @@
+//Funcionalidad para cambiar datos de usuario, cambio de imagen del perfil. 
 function subirImagen() {
     const entradaArchivo = document.getElementById('entradaArchivo');
     const contenedorImagen = document.getElementById('contenedorImagen');
@@ -42,7 +43,7 @@ if (imagenAlmacenada) {
     contenedorImagen.appendChild(imagenPorDefecto);
     localStorage.setItem(`imagenUsuario_${nombreUsuario}`, srcImagenPorDefecto);
 }
-
+//Funcionalidad para la carga de información del usuario logueado en la página y cambios
 document.addEventListener("DOMContentLoaded", function () {
     const userDataJSON = localStorage.getItem("userData");
 

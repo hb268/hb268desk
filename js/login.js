@@ -1,3 +1,4 @@
+//funcionalidad para hacer el registro o ingreso a la página según ya estés registrado o no. Chequeo de requerimientos para la contraseña, usuario y datos necesarios.
 document.addEventListener("DOMContentLoaded", function () {
     const switchLoginRegistro = document.getElementById("switchLoginRegistro");
     const accesoForm = document.querySelector(".acceso");
@@ -60,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   
     const btnAcceder = document.getElementById("btnAcceder");
-  
+  //Funcionalidad al acceder desde el evento click, chequeo de requerimientos obligatorios
     btnAcceder.addEventListener("click", () => {
       const username = document.getElementById("usernameLogin").value;
       const password = document.getElementById("contraseñaLogin").value;

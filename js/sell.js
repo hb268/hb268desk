@@ -24,9 +24,7 @@ function updateTotalCosts(){
     totalCostHTML.innerHTML = totalCostToShow;
 }
 
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
+//Función que se ejecuta una vez que se haya lanzado el evento de que el documento se encuentra cargado
 document.addEventListener("DOMContentLoaded", function(e){
     document.getElementById("productCountInput").addEventListener("change", function(){
         productCount = this.value;
@@ -72,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
 
-    //Configuraciones para el elemento que sube archivos
+    
     let dzoptions = {
         url:"/",
         autoQueue: false

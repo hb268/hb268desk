@@ -1,3 +1,4 @@
+//Carga de la información del producto seleccionado
 const divProducto = document.createElement("div");
 const containerProducto = document.getElementById("products-info");
    
@@ -83,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
 const Comment_div = document.createElement('div');
 const main_comment = document.querySelector("main");
 main_comment.appendChild(Comment_div);
-
+//Comentarios dentro del producto a modo de review, carga desde la info que trae de la local storage. Agregado de funcionalidad para nuevos comentarios al producto por parte del usuario.
 
 function loadComment() {
     const idProducto = localStorage.getItem("productoSeleccionado")
@@ -154,7 +155,7 @@ function loadComment() {
                 </div>
                 
                 `;
-                //DESAFIATE
+                
 
                 function obtenerFechaYHora() {
                     var fechaHora = new Date();
@@ -265,7 +266,7 @@ function mostrarComentariosGuardados() {
 document.addEventListener("DOMContentLoaded", mostrarComentariosGuardados);
 
 document.addEventListener("DOMContentLoaded", loadComment);
-
+//Funcionalidad para mostrar debajo del producto que estás viendo los que estén relacionados según sea el caso.
 const productoID = localStorage.getItem("productoSeleccionado");
 const produRelacionado = `https://japceibal.github.io/emercado-api/products/${productoID}.json`;
 

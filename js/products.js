@@ -1,3 +1,4 @@
+//Carga de los productos disponibles mostrando nombre, precio, imagen, cantidad de items vendidos
 const productListDiv = document.createElement('div');
 productListDiv.id = "productList";
 
@@ -59,6 +60,7 @@ function loadProducts() {
       console.error("Error en la solicitud:", error);
     });
 }
+//funcionalidad para poder filtrar en tiempo real por precio, máximo y mínimo. Y por orden ascendente y descendente
 
 function filtrarPorPrecio() {
   const precioMinimoInput = document.getElementById("rangeFilterCountMin");
@@ -192,7 +194,7 @@ document.getElementById("sortByCount").addEventListener("click", function () {
 
   generateProductList();
 });
-
+//Funcionalidad para búsqueda por palabras que contengan en la descripción o nombre del producto, en tiempo real.
 const searchInput = document.getElementById("searchInput");
 
 searchInput.addEventListener("input", () => {
